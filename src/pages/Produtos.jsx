@@ -27,6 +27,7 @@ export default function Produtos() {
   const [search, setSearch] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [searchParams] = useSearchParams();
+  const [selectedIds, setSelectedIds] = useState([]);
 
   useEffect(() => {
     load();
@@ -35,6 +36,10 @@ export default function Produtos() {
       setShowForm(true);
     }
   }, []);
+
+  useEffect(() => {
+    setSelectedIds([]);
+  }, [search]);
 
   async function load() {
     setLoading(true);
@@ -142,6 +147,39 @@ export default function Produtos() {
     }
   }
 
+  function handleSelectRow(id) {
+    setSelectedIds(prev =>
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
+  }
+
+  function handleSelectAll() {
+    if (selectedIds.length === filtered.length) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filtered.map(p => p.id));
+    }
+  }
+
+  async function handleDeleteSelected() {
+    if (!confirm(`Excluir ${selectedIds.length} produto(s) selecionado(s)?\nEsta ação não pode ser desfeita.`)) return;
+    
+    setLoading(true);
+    try {
+      await Promise.all(
+        selectedIds.map(id => deleteDoc(doc(db, 'produtos', id)))
+      );
+      toast.success(`${selectedIds.length} produto(s) excluído(s)!`);
+      setSelectedIds([]);
+      load();
+    } catch (err) {
+      toast.error('Erro ao excluir produtos selecionados');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const filtered = produtos.filter(p =>
     !search ||
     p.descricao?.toLowerCase().includes(search.toLowerCase()) ||
@@ -244,11 +282,21 @@ export default function Produtos() {
         </div>
       )}
 
-      <div className="filters-bar">
+      <div className="filters-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
         <div className="search-bar" style={{ flex: 1 }}>
           <span className="search-icon">🔍</span>
           <input type="text" className="form-input" placeholder="Buscar produto..." value={search} onChange={e => setSearch(e.target.value)} id="input-buscar-produto" />
         </div>
+        {selectedIds.length > 0 && (
+          <button
+            className="btn btn-danger"
+            onClick={handleDeleteSelected}
+            id="btn-excluir-selecionados"
+            style={{ animation: 'fadeIn 0.2s ease' }}
+          >
+            🗑️ Excluir Selecionados ({selectedIds.length})
+          </button>
+        )}
       </div>
 
       {filtered.length === 0 ? (
@@ -264,6 +312,15 @@ export default function Produtos() {
           <table>
             <thead>
               <tr>
+                <th style={{ width: '40px', textAlign: 'center' }}>
+                  <input
+                    type="checkbox"
+                    checked={filtered.length > 0 && selectedIds.length === filtered.length}
+                    onChange={handleSelectAll}
+                    style={{ cursor: 'pointer', transform: 'scale(1.2)' }}
+                    id="checkbox-select-all"
+                  />
+                </th>
                 <th>Cód.</th>
                 <th>Descrição</th>
                 <th>Grupo</th>
@@ -278,28 +335,40 @@ export default function Produtos() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map(p => (
-                <tr key={p.id}>
-                  <td style={{ color: 'var(--text-muted)', fontWeight: 600 }}>{p.codigo}</td>
-                  <td style={{ fontWeight: 500 }}>{p.descricao}</td>
-                  <td><span className="badge badge-gray">{p.grupo}</span></td>
-                  <td style={{ color: 'var(--text-secondary)', fontSize: '0.8125rem' }}>{p.ca || '—'}</td>
-                  <td style={{ color: 'var(--text-secondary)', fontSize: '0.8125rem', whiteSpace: 'nowrap' }}>{p.validadeCa || '—'}</td>
-                  <td><span className="badge badge-blue">{p.unidade}</span></td>
-                  <td>{p.localizacao ? <span className="badge badge-yellow">{p.localizacao}</span> : '—'}</td>
-                  <td>{p.estoqueMin}</td>
-                  <td>{p.estoqueMax}</td>
-                  <td style={{ fontWeight: 700, color: p.estoqueAtual <= p.estoqueMin ? 'var(--accent-red)' : 'var(--accent-green)' }}>
-                    {p.estoqueAtual}
-                  </td>
-                  <td>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <button className="btn btn-secondary btn-sm" onClick={() => startEdit(p)} id={`btn-edit-${p.id}`}>✏️</button>
-                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(p)} id={`btn-del-${p.id}`}>🗑️</button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {filtered.map(p => {
+                const isSelected = selectedIds.includes(p.id);
+                return (
+                  <tr key={p.id} style={{ backgroundColor: isSelected ? 'rgba(239, 68, 68, 0.08)' : '' }}>
+                    <td style={{ textAlign: 'center' }}>
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={() => handleSelectRow(p.id)}
+                        style={{ cursor: 'pointer', transform: 'scale(1.2)' }}
+                        id={`checkbox-select-${p.id}`}
+                      />
+                    </td>
+                    <td style={{ color: 'var(--text-muted)', fontWeight: 600 }}>{p.codigo}</td>
+                    <td style={{ fontWeight: 500 }}>{p.descricao}</td>
+                    <td><span className="badge badge-gray">{p.grupo}</span></td>
+                    <td style={{ color: 'var(--text-secondary)', fontSize: '0.8125rem' }}>{p.ca || '—'}</td>
+                    <td style={{ color: 'var(--text-secondary)', fontSize: '0.8125rem', whiteSpace: 'nowrap' }}>{p.validadeCa || '—'}</td>
+                    <td><span className="badge badge-blue">{p.unidade}</span></td>
+                    <td>{p.localizacao ? <span className="badge badge-yellow">{p.localizacao}</span> : '—'}</td>
+                    <td>{p.estoqueMin}</td>
+                    <td>{p.estoqueMax}</td>
+                    <td style={{ fontWeight: 700, color: p.estoqueAtual <= p.estoqueMin ? 'var(--accent-red)' : 'var(--accent-green)' }}>
+                      {p.estoqueAtual}
+                    </td>
+                    <td>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <button className="btn btn-secondary btn-sm" onClick={() => startEdit(p)} id={`btn-edit-${p.id}`}>✏️</button>
+                        <button className="btn btn-danger btn-sm" onClick={() => handleDelete(p)} id={`btn-del-${p.id}`}>🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
