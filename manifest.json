@@ -1,0 +1,21 @@
+{
+  "short_name": "Controle EPI",
+  "name": "Controle de EPI GEL",
+  "icons": [
+    {
+      "src": "/CONTROLE-DE-EPI-GEL/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/CONTROLE-DE-EPI-GEL/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/CONTROLE-DE-EPI-GEL/",
+  "background_color": "#0a0d14",
+  "theme_color": "#111827",
+  "display": "standalone",
+  "orientation": "portrait"
+}
