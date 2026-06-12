@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { filterProdutos } from '../utils/search';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
-import * as XLSX from 'xlsx';
+import XLSX from 'xlsx-js-style';
 
 function getStatusBadge(produto) {
   const { estoqueAtual, estoqueMin, estoqueMax } = produto;
@@ -45,6 +45,8 @@ export default function Estoque() {
       const entradas = allMovs.filter(m => m.tipo === 'ENTRADA');
       const saidas   = allMovs.filter(m => m.tipo === 'SAIDA');
       const now      = format(new Date(), "dd/MM/yyyy 'às' HH:mm");
+      
+      const totalValuation = produtos.reduce((sum, p) => sum + ((p.estoqueAtual ?? 0) * (p.valorUnitario ?? 0)), 0);
 
       // ── Colour palette ───────────────────────────────────────────────────
       const C = {
@@ -92,10 +94,6 @@ export default function Estoque() {
       });
 
       // ── Build sheet helper ───────────────────────────────────────────────
-      // headers: string[]
-      // rows: (string|number)[][]
-      // colWidths: number[]
-      // getRowMeta: (row, ri) => { fill?, textColor?, bold? }
       function buildSheet(headers, rows, colWidths, getRowMeta) {
         const ws = {};
         const maxR = rows.length;
@@ -168,6 +166,7 @@ export default function Estoque() {
         { label: 'Produtos com Estoque Baixo',    value: produtos.filter(p => p.estoqueAtual <= p.estoqueMin).length,   fill: C.vermCl,  txtColor: C.vermTxt },
         { label: 'Produtos com Estoque Normal',   value: produtos.filter(p => p.estoqueAtual > p.estoqueMin && p.estoqueAtual < p.estoqueMax).length, fill: C.verdeCl, txtColor: C.verdeTxt },
         { label: 'Produtos com Estoque Alto',     value: produtos.filter(p => p.estoqueAtual >= p.estoqueMax).length,   fill: C.amarCl,  txtColor: C.amarTxt },
+        { label: 'Valor Total Financeiro do Estoque', value: totalValuation, fill: C.azulClaro, txtColor: C.azulEscuro, isCurrency: true },
         { label: '', isBlank: true },
         { label: 'MOVIMENTAÇÕES', isSection: true },
         { label: 'Total de Entradas Registradas', value: entradas.length, fill: C.verdeCl, txtColor: C.verdeTxt },
@@ -187,7 +186,7 @@ export default function Estoque() {
         rowIdx++;
       });
 
-      summaryRows.forEach(({ label, value, isSection, isBlank, fill, txtColor }) => {
+      summaryRows.forEach(({ label, value, isSection, isBlank, fill, txtColor, isCurrency }) => {
         if (isBlank) {
           capaRowHeights.push({ hpt: 10 });
           rowIdx++;
@@ -206,7 +205,8 @@ export default function Estoque() {
         };
         wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 1 })] = {
           v: value, t: 'n',
-          s: { font: { bold: true, sz: 13, name: 'Calibri', color: { rgb: txtColor || C.azulEscuro } }, fill: rowFill, border: border(), alignment: { horizontal: 'center', vertical: 'center' } },
+          z: isCurrency ? '"R$ "#,##0.00' : undefined,
+          s: { font: { bold: true, sz: 13, name: 'Calibri', color: { rgb: txtColor || C.azulEscuro } }, fill: rowFill, border: border(), alignment: { horizontal: isCurrency ? 'right' : 'center', vertical: 'center' } },
         };
         capaRowHeights.push({ hpt: 22 });
         rowIdx++;
@@ -219,22 +219,26 @@ export default function Estoque() {
         { s: { r: 2, c: 0 }, e: { r: 2, c: 1 } },
         { s: { r: 3, c: 0 }, e: { r: 3, c: 1 } },
         { s: { r: 4, c: 0 }, e: { r: 4, c: 1 } },
-        { s: { r: 9, c: 0 }, e: { r: 9, c: 1 } },
+        { s: { r: 10, c: 0 }, e: { r: 10, c: 1 } },
       ];
       wsCapa['!ref']  = XLSX.utils.encode_range({ s: { c: 0, r: 0 }, e: { c: 1, r: rowIdx - 1 } });
-      wsCapa['!cols'] = [{ wch: 42 }, { wch: 14 }];
+      wsCapa['!cols'] = [{ wch: 42 }, { wch: 18 }];
       wsCapa['!rows'] = capaRowHeights;
 
       // ── Sheet 2 — ESTOQUE ATUAL ──────────────────────────────────────────
       const estoqueHeaders = [
         'Código', 'Descrição do EPI', 'Grupo / Categoria', 'Unid.',
         'Nº CA', 'Validade CA', 'Localização',
-        'Est. Mínimo', 'Est. Máximo', 'Est. Atual', 'Status',
+        'Est. Mínimo', 'Est. Máximo', 'Valor Unitário', 'Valor Total', 'Est. Atual', 'Status',
       ];
       const estoqueRows = produtos.map(p => {
         let status = 'NORMAL';
         if (p.estoqueAtual <= p.estoqueMin)  status = 'ESTOQUE BAIXO';
         else if (p.estoqueAtual >= p.estoqueMax) status = 'ESTOQUE ALTO';
+        
+        const vUnit = p.valorUnitario ?? 0;
+        const vTotal = (p.estoqueAtual ?? 0) * vUnit;
+
         return [
           p.codigo      || '',
           p.descricao   || '',
@@ -245,13 +249,15 @@ export default function Estoque() {
           p.localizacao || '',
           p.estoqueMin  ?? 0,
           p.estoqueMax  ?? 0,
+          vUnit,
+          vTotal,
           p.estoqueAtual ?? 0,
           status,
         ];
       });
 
       const estoqueRowMeta = (row) => {
-        const status = row[10];
+        const status = row[12];
         if (status === 'ESTOQUE BAIXO') return { fill: C.vermCl, textColor: C.vermTxt };
         if (status === 'ESTOQUE ALTO')  return { fill: C.amarCl, textColor: C.amarTxt };
         return {};
@@ -259,26 +265,47 @@ export default function Estoque() {
 
       const wsEstoque = buildSheet(
         estoqueHeaders, estoqueRows,
-        [10, 42, 20, 7, 10, 13, 14, 11, 11, 12, 16],
+        [10, 42, 20, 7, 10, 13, 14, 11, 11, 14, 14, 12, 16],
         estoqueRowMeta
       );
 
       // Override status column to be centered + bold pill style
       estoqueRows.forEach((row, ri) => {
-        const status  = row[10];
+        const status  = row[12];
         const isLow   = status === 'ESTOQUE BAIXO';
         const isHigh  = status === 'ESTOQUE ALTO';
         const fillClr = isLow ? C.vermCl : isHigh ? C.amarCl : C.verdeCl;
         const txtClr  = isLow ? C.vermTxt : isHigh ? C.amarTxt : C.verdeTxt;
-        wsEstoque[XLSX.utils.encode_cell({ r: ri + 1, c: 10 })] = {
+        
+        // Status Column (index 12)
+        wsEstoque[XLSX.utils.encode_cell({ r: ri + 1, c: 12 })] = {
           v: status, t: 's',
           s: { font: { bold: true, sz: 9, name: 'Calibri', color: { rgb: txtClr } },
                fill: { patternType: 'solid', fgColor: { rgb: fillClr } },
                border: border(),
                alignment: { horizontal: 'center', vertical: 'center' } },
         };
-        // Est. Atual: bold + colored
-        const estAtualAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 9 });
+
+        // Valor Unitário (index 9)
+        const vUnitAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 9 });
+        wsEstoque[vUnitAddr] = {
+          v: row[9], t: 'n', z: '"R$ "#,##0.00',
+          s: { font: { sz: 9, name: 'Calibri', color: { rgb: isLow ? C.vermTxt : (isHigh ? C.amarTxt : '000000') } },
+               fill: { patternType: 'solid', fgColor: { rgb: isLow ? C.vermCl : (isHigh ? C.amarCl : (ri % 2 === 0 ? C.branco : C.cinzaLinha)) } },
+               border: border(), alignment: { horizontal: 'right', vertical: 'center' } }
+        };
+
+        // Valor Total (index 10)
+        const vTotalAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 10 });
+        wsEstoque[vTotalAddr] = {
+          v: row[10], t: 'n', z: '"R$ "#,##0.00',
+          s: { font: { bold: true, sz: 10, name: 'Calibri', color: { rgb: isLow ? C.vermTxt : (isHigh ? C.amarTxt : '000000') } },
+               fill: { patternType: 'solid', fgColor: { rgb: isLow ? C.vermCl : (isHigh ? C.amarCl : (ri % 2 === 0 ? C.branco : C.cinzaLinha)) } },
+               border: border(), alignment: { horizontal: 'right', vertical: 'center' } }
+        };
+
+        // Est. Atual (index 11): bold + colored
+        const estAtualAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 11 });
         wsEstoque[estAtualAddr].s = {
           ...wsEstoque[estAtualAddr].s,
           font: { bold: true, sz: 11, name: 'Calibri', color: { rgb: isLow ? C.vermTxt : C.verdeTxt } },
@@ -290,7 +317,7 @@ export default function Estoque() {
       // ── Sheet 3 — ENTRADAS ───────────────────────────────────────────────
       const entHeaders = [
         'Data', 'Código', 'Descrição do EPI', 'Qtd.', 'Unid.',
-        'Fornecedor', 'Nº Nota Fiscal', 'Observação', 'Registrado por',
+        'Valor Unitário', 'Custo Total', 'Fornecedor', 'Nº Nota Fiscal', 'Observação', 'Registrado por',
       ];
       const entRows = entradas.map(m => {
         const d = m.data || (m.criadoEm?.toDate ? format(m.criadoEm.toDate(), 'dd/MM/yyyy') : '—');
@@ -300,13 +327,31 @@ export default function Estoque() {
           m.produtoDescricao || '',
           m.quantidade       ?? 0,
           m.unidade          || '',
+          m.valorUnitario    ?? 0,
+          m.custo            ?? 0,
           m.fornecedor       || '—',
           m.nfNumero         || '—',
           m.observacao       || '—',
           m.registradoPorEmail || '—',
         ];
       });
-      const wsEntradas = buildSheet(entHeaders, entRows, [13, 10, 44, 7, 7, 30, 14, 30, 24], null);
+      const wsEntradas = buildSheet(entHeaders, entRows, [13, 10, 44, 7, 7, 14, 14, 30, 14, 30, 24], null);
+      
+      entRows.forEach((row, ri) => {
+        // Valor Unitário (index 5)
+        const vUnitAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 5 });
+        wsEntradas[vUnitAddr] = {
+          v: row[5], t: 'n', z: '"R$ "#,##0.00',
+          s: { font: { sz: 9, name: 'Calibri' }, fill: { patternType: 'solid', fgColor: { rgb: ri % 2 === 0 ? C.branco : C.cinzaLinha } }, border: border(), alignment: { horizontal: 'right', vertical: 'center' } }
+        };
+        // Custo Total (index 6)
+        const vCustoAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 6 });
+        wsEntradas[vCustoAddr] = {
+          v: row[6], t: 'n', z: '"R$ "#,##0.00',
+          s: { font: { bold: true, sz: 9, name: 'Calibri' }, fill: { patternType: 'solid', fgColor: { rgb: ri % 2 === 0 ? C.branco : C.cinzaLinha } }, border: border(), alignment: { horizontal: 'right', vertical: 'center' } }
+        };
+      });
+
       wsEntradas['!freeze'] = { xSplit: 0, ySplit: 1, topLeftCell: 'A2', activePane: 'bottomLeft', state: 'frozen' };
 
       // ── Sheet 4 — SAÍDAS ─────────────────────────────────────────────────
@@ -348,6 +393,10 @@ export default function Estoque() {
     }
   };
 
+  const totalSaldos = produtos.reduce((acc, p) => acc + (p.estoqueAtual ?? 0), 0);
+  const valorTotalEstoque = produtos.reduce((acc, p) => acc + ((p.estoqueAtual ?? 0) * (p.valorUnitario ?? 0)), 0);
+  const totalAlerta = produtos.filter(p => p.estoqueAtual <= p.estoqueMin).length;
+
   const searchFiltered = filterProdutos(produtos, search);
   const filtered = searchFiltered.filter(p => {
     if (filter === 'todos') return true;
@@ -385,6 +434,32 @@ export default function Estoque() {
           <button className="btn btn-primary" onClick={() => navigate('/produtos')} id="btn-novo-produto">
             + Novo Produto
           </button>
+        </div>
+      </div>
+
+      <div className="stats-grid" style={{ marginBottom: '1.5rem' }}>
+        <div className="card stat-card">
+          <div className="stat-icon blue">📦</div>
+          <div>
+            <div className="stat-value">{totalSaldos}</div>
+            <div className="stat-label">Saldo de Itens</div>
+          </div>
+        </div>
+        <div className="card stat-card">
+          <div className="stat-icon green">💰</div>
+          <div>
+            <div className="stat-value">
+              {valorTotalEstoque.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+            </div>
+            <div className="stat-label">Valor do Estoque</div>
+          </div>
+        </div>
+        <div className="card stat-card">
+          <div className="stat-icon red">🚨</div>
+          <div>
+            <div className="stat-value">{totalAlerta}</div>
+            <div className="stat-label">Produtos em Alerta</div>
+          </div>
         </div>
       </div>
 
@@ -436,6 +511,8 @@ export default function Estoque() {
                 <th>Local.</th>
                 <th>Est. Mín</th>
                 <th>Est. Máx</th>
+                <th>Valor Unit.</th>
+                <th>Valor Total</th>
                 <th>Est. Atual</th>
                 <th>Status</th>
               </tr>
@@ -462,6 +539,12 @@ export default function Estoque() {
                   <td>{p.localizacao ? <span className="badge badge-yellow">{p.localizacao}</span> : '—'}</td>
                   <td style={{ color: 'var(--text-secondary)' }}>{p.estoqueMin}</td>
                   <td style={{ color: 'var(--text-secondary)' }}>{p.estoqueMax}</td>
+                  <td style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
+                    {p.valorUnitario ? `R$ ${p.valorUnitario.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : 'R$ 0,00'}
+                  </td>
+                  <td style={{ color: 'var(--text-primary)', fontSize: '0.875rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                    {((p.estoqueAtual ?? 0) * (p.valorUnitario ?? 0)).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                  </td>
                   <td style={{ fontWeight: 700, color: p.estoqueAtual <= p.estoqueMin ? 'var(--accent-red)' : 'var(--accent-green)', fontSize: '1rem' }}>
                     {p.estoqueAtual}
                   </td>

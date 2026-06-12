@@ -17,7 +17,7 @@ function StatCard({ icon, label, value, color }) {
 }
 
 export default function Dashboard() {
-  const [stats, setStats] = useState({ total: 0, baixoEstoque: 0, entradasHoje: 0, saidasHoje: 0 });
+  const [stats, setStats] = useState({ total: 0, baixoEstoque: 0, entradasHoje: 0, saidasHoje: 0, valorTotalEstoque: 0 });
   const [alertas, setAlertas] = useState([]);
   const [recentes, setRecentes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,6 +29,7 @@ export default function Dashboard() {
         const prodSnap = await getDocs(collection(db, 'produtos'));
         const produtos = prodSnap.docs.map(d => ({ id: d.id, ...d.data() }));
         const baixoEstoque = produtos.filter(p => p.estoqueAtual <= p.estoqueMin);
+        const valorTotalEstoque = produtos.reduce((acc, p) => acc + ((p.estoqueAtual ?? 0) * (p.valorUnitario ?? 0)), 0);
 
         // Movimentações de hoje
         const hoje = new Date();
@@ -53,7 +54,7 @@ export default function Dashboard() {
         );
         setRecentes(recentSnap.docs.slice(0, 8).map(d => ({ id: d.id, ...d.data() })));
 
-        setStats({ total: produtos.length, baixoEstoque: baixoEstoque.length, entradasHoje, saidasHoje });
+        setStats({ total: produtos.length, baixoEstoque: baixoEstoque.length, entradasHoje, saidasHoje, valorTotalEstoque });
         setAlertas(baixoEstoque.slice(0, 5));
       } catch (e) {
         console.error(e);
@@ -79,6 +80,7 @@ export default function Dashboard() {
 
       <div className="stats-grid">
         <StatCard icon="📦" label="Produtos Cadastrados" value={stats.total} color="blue" />
+        <StatCard icon="💰" label="Custo do Estoque" value={stats.valorTotalEstoque.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} color="green" />
         <StatCard icon="🔴" label="Estoque Baixo" value={stats.baixoEstoque} color="red" />
         <StatCard icon="📥" label="Unidades Entrada Hoje" value={stats.entradasHoje} color="green" />
         <StatCard icon="📤" label="Unidades Saída Hoje" value={stats.saidasHoje} color="yellow" />

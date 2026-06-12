@@ -15,7 +15,7 @@ const UNIDADES = ['UND', 'PAR', 'CONJ', 'MTS', 'M'];
 const EMPTY_FORM = {
   codigo: '', grupo: 'CONSUMO', descricao: '', ca: '',
   validadeCa: '', unidade: 'UND', estoqueMin: '', estoqueMax: '', estoqueAtual: '',
-  localizacao: ''
+  localizacao: '', valorUnitario: ''
 };
 
 export default function Produtos() {
@@ -75,6 +75,7 @@ export default function Produtos() {
       estoqueMax: String(produto.estoqueMax || ''),
       estoqueAtual: String(produto.estoqueAtual || ''),
       localizacao: produto.localizacao || '',
+      valorUnitario: String(produto.valorUnitario || ''),
     });
     setEditId(produto.id);
     setShowForm(true);
@@ -112,6 +113,7 @@ export default function Produtos() {
         estoqueMax: parseInt(form.estoqueMax) || 0,
         estoqueAtual: parseInt(form.estoqueAtual) || 0,
         localizacao: form.localizacao || null,
+        valorUnitario: parseFloat(form.valorUnitario) || 0,
         atualizadoEm: serverTimestamp(),
       };
 
@@ -265,6 +267,11 @@ export default function Produtos() {
                 <label className="form-label">Estoque Atual <span>(saldo inicial)</span></label>
                 <input type="number" name="estoqueAtual" className="form-input" placeholder="0" min="0" value={form.estoqueAtual} onChange={handleField} id="input-est-atual" />
               </div>
+
+              <div className="form-group">
+                <label className="form-label">Valor Unitário (R$)</label>
+                <input type="number" name="valorUnitario" className="form-input" placeholder="0.00" min="0" step="0.01" value={form.valorUnitario} onChange={handleField} id="input-valor-unitario" />
+              </div>
             </div>
 
             <div style={{ display: 'flex', gap: '0.75rem' }}>
@@ -328,6 +335,7 @@ export default function Produtos() {
                 <th>Mín</th>
                 <th>Máx</th>
                 <th>Atual</th>
+                <th>Val. Unit.</th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -356,6 +364,9 @@ export default function Produtos() {
                     <td>{p.estoqueMax}</td>
                     <td style={{ fontWeight: 700, color: p.estoqueAtual <= p.estoqueMin ? 'var(--accent-red)' : 'var(--accent-green)' }}>
                       {p.estoqueAtual}
+                    </td>
+                    <td style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
+                      {p.valorUnitario ? `R$ ${p.valorUnitario.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : 'R$ 0,00'}
                     </td>
                     <td>
                       <div style={{ display: 'flex', gap: '0.5rem' }}>
