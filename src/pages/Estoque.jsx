@@ -37,85 +37,309 @@ export default function Estoque() {
   const handleExportExcel = async () => {
     setExporting(true);
     try {
-      // 1. Fetch movements on demand
+      // ── Fetch movimentacoes ──────────────────────────────────────────────
       const movsSnap = await getDocs(
         query(collection(db, 'movimentacoes'), orderBy('criadoEm', 'desc'))
       );
-      const allMovs = movsSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-
-      // 2. Filter inputs and outputs
+      const allMovs  = movsSnap.docs.map(d => ({ id: d.id, ...d.data() }));
       const entradas = allMovs.filter(m => m.tipo === 'ENTRADA');
-      const saidas = allMovs.filter(m => m.tipo === 'SAIDA');
+      const saidas   = allMovs.filter(m => m.tipo === 'SAIDA');
+      const now      = format(new Date(), "dd/MM/yyyy 'às' HH:mm");
 
-      // 3. Format Estoque data
-      const estoqueData = produtos.map(p => {
-        let status = 'Normal';
-        if (p.estoqueAtual <= p.estoqueMin) status = 'Estoque Baixo';
-        else if (p.estoqueAtual >= p.estoqueMax) status = 'Estoque Alto';
+      // ── Colour palette ───────────────────────────────────────────────────
+      const C = {
+        azulEscuro : '1E3A5F',
+        azulMedio  : '2563A8',
+        azulClaro  : 'DBEAFE',
+        branco     : 'FFFFFF',
+        cinzaLinha : 'F8FAFC',
+        cinzaBorda : 'CBD5E1',
+        verdeCl    : 'DCFCE7',
+        verdeTxt   : '166534',
+        vermCl     : 'FEE2E2',
+        vermTxt    : '991B1B',
+        amarCl     : 'FEF9C3',
+        amarTxt    : '854D0E',
+      };
 
-        return {
-          'Código': p.codigo || '',
-          'Descrição': p.descricao || '',
-          'Grupo': p.grupo || '',
-          'Unidade': p.unidade || '',
-          'CA': p.ca || '',
-          'Validade CA': p.validadeCa || '',
-          'Localização': p.localizacao || '',
-          'Estoque Mínimo': p.estoqueMin ?? 0,
-          'Estoque Máximo': p.estoqueMax ?? 0,
-          'Estoque Atual': p.estoqueAtual ?? 0,
-          'Status': status
+      // ── Shared style factories ───────────────────────────────────────────
+      const border = (color = C.cinzaBorda) => ({
+        top   : { style: 'thin', color: { rgb: color } },
+        bottom: { style: 'thin', color: { rgb: color } },
+        left  : { style: 'thin', color: { rgb: color } },
+        right : { style: 'thin', color: { rgb: color } },
+      });
+
+      const sColHeader = {
+        font     : { bold: true, sz: 10, color: { rgb: C.branco }, name: 'Calibri' },
+        fill     : { patternType: 'solid', fgColor: { rgb: C.azulMedio } },
+        border   : border(C.azulEscuro),
+        alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
+      };
+
+      const sNormal = (ri, fillOverride) => ({
+        font     : { sz: 9, name: 'Calibri' },
+        fill     : { patternType: 'solid', fgColor: { rgb: fillOverride || (ri % 2 === 0 ? C.branco : C.cinzaLinha) } },
+        border   : border(),
+        alignment: { horizontal: 'left', vertical: 'center' },
+      });
+
+      const sCenter = (ri, fillOverride, fontExtra = {}) => ({
+        font     : { sz: 9, name: 'Calibri', ...fontExtra },
+        fill     : { patternType: 'solid', fgColor: { rgb: fillOverride || (ri % 2 === 0 ? C.branco : C.cinzaLinha) } },
+        border   : border(),
+        alignment: { horizontal: 'center', vertical: 'center' },
+      });
+
+      // ── Build sheet helper ───────────────────────────────────────────────
+      // headers: string[]
+      // rows: (string|number)[][]
+      // colWidths: number[]
+      // getRowMeta: (row, ri) => { fill?, textColor?, bold? }
+      function buildSheet(headers, rows, colWidths, getRowMeta) {
+        const ws = {};
+        const maxR = rows.length;
+        const maxC = headers.length - 1;
+
+        // Header row
+        headers.forEach((h, ci) => {
+          ws[XLSX.utils.encode_cell({ r: 0, c: ci })] = { v: h, t: 's', s: sColHeader };
+        });
+
+        // Data rows
+        rows.forEach((row, ri) => {
+          const meta = getRowMeta ? getRowMeta(row, ri) : {};
+          const fill = meta.fill || null;
+          const fontExtra = {};
+          if (meta.textColor) fontExtra.color = { rgb: meta.textColor };
+          if (meta.bold)      fontExtra.bold = true;
+
+          row.forEach((v, ci) => {
+            const isNum = typeof v === 'number';
+            ws[XLSX.utils.encode_cell({ r: ri + 1, c: ci })] = {
+              v : v ?? '',
+              t : isNum ? 'n' : 's',
+              s : isNum
+                ? sCenter(ri, fill, fontExtra)
+                : { ...sNormal(ri, fill), font: { sz: 9, name: 'Calibri', ...fontExtra } },
+            };
+          });
+        });
+
+        ws['!ref']  = XLSX.utils.encode_range({ s: { c: 0, r: 0 }, e: { c: maxC, r: maxR } });
+        ws['!cols'] = colWidths.map(w => ({ wch: w }));
+        ws['!rows'] = [{ hpt: 28 }, ...rows.map(() => ({ hpt: 17 }))];
+        return ws;
+      }
+
+      // ── Sheet 1 — RESUMO / CAPA ──────────────────────────────────────────
+      const wsCapa = {};
+
+      // Title block
+      const titleRows = [
+        { text: 'CONTROLE DE EPI — GEL ENGENHARIA', style: {
+          font     : { bold: true, sz: 22, color: { rgb: C.branco }, name: 'Calibri' },
+          fill     : { patternType: 'solid', fgColor: { rgb: C.azulEscuro } },
+          alignment: { horizontal: 'center', vertical: 'center' },
+        }, hpt: 48 },
+        { text: 'Relatório de Estoque e Movimentações', style: {
+          font     : { sz: 14, color: { rgb: C.azulClaro }, name: 'Calibri' },
+          fill     : { patternType: 'solid', fgColor: { rgb: C.azulEscuro } },
+          alignment: { horizontal: 'center', vertical: 'center' },
+        }, hpt: 30 },
+        { text: `Gerado em: ${now}`, style: {
+          font     : { sz: 10, italic: true, color: { rgb: '6B7280' }, name: 'Calibri' },
+          fill     : { patternType: 'solid', fgColor: { rgb: C.cinzaLinha } },
+          alignment: { horizontal: 'center', vertical: 'center' },
+        }, hpt: 20 },
+        { text: '', style: {}, hpt: 10 }, // spacer
+      ];
+
+      // Summary sections
+      const secHeaderStyle = {
+        font     : { bold: true, sz: 11, color: { rgb: C.branco }, name: 'Calibri' },
+        fill     : { patternType: 'solid', fgColor: { rgb: C.azulMedio } },
+        alignment: { horizontal: 'left', vertical: 'center' },
+      };
+
+      const summaryRows = [
+        { label: 'RESUMO DO ESTOQUE', isSection: true },
+        { label: 'Total de Produtos Cadastrados', value: produtos.length, fill: C.branco },
+        { label: 'Produtos com Estoque Baixo',    value: produtos.filter(p => p.estoqueAtual <= p.estoqueMin).length,   fill: C.vermCl,  txtColor: C.vermTxt },
+        { label: 'Produtos com Estoque Normal',   value: produtos.filter(p => p.estoqueAtual > p.estoqueMin && p.estoqueAtual < p.estoqueMax).length, fill: C.verdeCl, txtColor: C.verdeTxt },
+        { label: 'Produtos com Estoque Alto',     value: produtos.filter(p => p.estoqueAtual >= p.estoqueMax).length,   fill: C.amarCl,  txtColor: C.amarTxt },
+        { label: '', isBlank: true },
+        { label: 'MOVIMENTAÇÕES', isSection: true },
+        { label: 'Total de Entradas Registradas', value: entradas.length, fill: C.verdeCl, txtColor: C.verdeTxt },
+        { label: 'Total de Saídas Registradas',   value: saidas.length,   fill: C.vermCl,  txtColor: C.vermTxt },
+        { label: 'Total de Movimentações',         value: allMovs.length,  fill: C.branco },
+      ];
+
+      let rowIdx = 0;
+      const capaRowHeights = [];
+
+      titleRows.forEach(({ text, style, hpt }) => {
+        const isBlank = text === '' && Object.keys(style).length === 0;
+        if (!isBlank) {
+          wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 0 })] = { v: text, t: 's', s: style };
+        }
+        capaRowHeights.push({ hpt: hpt || 20 });
+        rowIdx++;
+      });
+
+      summaryRows.forEach(({ label, value, isSection, isBlank, fill, txtColor }) => {
+        if (isBlank) {
+          capaRowHeights.push({ hpt: 10 });
+          rowIdx++;
+          return;
+        }
+        if (isSection) {
+          wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 0 })] = { v: label, t: 's', s: secHeaderStyle };
+          capaRowHeights.push({ hpt: 24 });
+          rowIdx++;
+          return;
+        }
+        const rowFill = { patternType: 'solid', fgColor: { rgb: fill || C.branco } };
+        wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 0 })] = {
+          v: label, t: 's',
+          s: { font: { sz: 10, name: 'Calibri' }, fill: rowFill, border: border(), alignment: { horizontal: 'left', vertical: 'center' } },
+        };
+        wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 1 })] = {
+          v: value, t: 'n',
+          s: { font: { bold: true, sz: 13, name: 'Calibri', color: { rgb: txtColor || C.azulEscuro } }, fill: rowFill, border: border(), alignment: { horizontal: 'center', vertical: 'center' } },
+        };
+        capaRowHeights.push({ hpt: 22 });
+        rowIdx++;
+      });
+
+      // Merges for title rows + section headers
+      wsCapa['!merges'] = [
+        { s: { r: 0, c: 0 }, e: { r: 0, c: 1 } },
+        { s: { r: 1, c: 0 }, e: { r: 1, c: 1 } },
+        { s: { r: 2, c: 0 }, e: { r: 2, c: 1 } },
+        { s: { r: 3, c: 0 }, e: { r: 3, c: 1 } },
+        { s: { r: 4, c: 0 }, e: { r: 4, c: 1 } },
+        { s: { r: 9, c: 0 }, e: { r: 9, c: 1 } },
+      ];
+      wsCapa['!ref']  = XLSX.utils.encode_range({ s: { c: 0, r: 0 }, e: { c: 1, r: rowIdx - 1 } });
+      wsCapa['!cols'] = [{ wch: 42 }, { wch: 14 }];
+      wsCapa['!rows'] = capaRowHeights;
+
+      // ── Sheet 2 — ESTOQUE ATUAL ──────────────────────────────────────────
+      const estoqueHeaders = [
+        'Código', 'Descrição do EPI', 'Grupo / Categoria', 'Unid.',
+        'Nº CA', 'Validade CA', 'Localização',
+        'Est. Mínimo', 'Est. Máximo', 'Est. Atual', 'Status',
+      ];
+      const estoqueRows = produtos.map(p => {
+        let status = 'NORMAL';
+        if (p.estoqueAtual <= p.estoqueMin)  status = 'ESTOQUE BAIXO';
+        else if (p.estoqueAtual >= p.estoqueMax) status = 'ESTOQUE ALTO';
+        return [
+          p.codigo      || '',
+          p.descricao   || '',
+          p.grupo       || '',
+          p.unidade     || '',
+          p.ca          || '',
+          p.validadeCa  || '',
+          p.localizacao || '',
+          p.estoqueMin  ?? 0,
+          p.estoqueMax  ?? 0,
+          p.estoqueAtual ?? 0,
+          status,
+        ];
+      });
+
+      const estoqueRowMeta = (row) => {
+        const status = row[10];
+        if (status === 'ESTOQUE BAIXO') return { fill: C.vermCl, textColor: C.vermTxt };
+        if (status === 'ESTOQUE ALTO')  return { fill: C.amarCl, textColor: C.amarTxt };
+        return {};
+      };
+
+      const wsEstoque = buildSheet(
+        estoqueHeaders, estoqueRows,
+        [10, 42, 20, 7, 10, 13, 14, 11, 11, 12, 16],
+        estoqueRowMeta
+      );
+
+      // Override status column to be centered + bold pill style
+      estoqueRows.forEach((row, ri) => {
+        const status  = row[10];
+        const isLow   = status === 'ESTOQUE BAIXO';
+        const isHigh  = status === 'ESTOQUE ALTO';
+        const fillClr = isLow ? C.vermCl : isHigh ? C.amarCl : C.verdeCl;
+        const txtClr  = isLow ? C.vermTxt : isHigh ? C.amarTxt : C.verdeTxt;
+        wsEstoque[XLSX.utils.encode_cell({ r: ri + 1, c: 10 })] = {
+          v: status, t: 's',
+          s: { font: { bold: true, sz: 9, name: 'Calibri', color: { rgb: txtClr } },
+               fill: { patternType: 'solid', fgColor: { rgb: fillClr } },
+               border: border(),
+               alignment: { horizontal: 'center', vertical: 'center' } },
+        };
+        // Est. Atual: bold + colored
+        const estAtualAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 9 });
+        wsEstoque[estAtualAddr].s = {
+          ...wsEstoque[estAtualAddr].s,
+          font: { bold: true, sz: 11, name: 'Calibri', color: { rgb: isLow ? C.vermTxt : C.verdeTxt } },
         };
       });
 
-      // 4. Format Entradas data
-      const entradasData = entradas.map(m => {
-        const dataFormatada = m.data || (m.criadoEm?.toDate ? format(m.criadoEm.toDate(), 'yyyy-MM-dd') : '—');
-        return {
-          'Data': dataFormatada,
-          'Código do Produto': m.produtoCodigo || '',
-          'Descrição do Produto': m.produtoDescricao || '',
-          'Quantidade': m.quantidade ?? 0,
-          'Unidade': m.unidade || '',
-          'Fornecedor': m.fornecedor || '—',
-          'Nº NF': m.nfNumero || '—',
-          'Observação': m.observacao || '—',
-          'Registrado por': m.registradoPorEmail || '—'
-        };
-      });
+      wsEstoque['!freeze'] = { xSplit: 0, ySplit: 1, topLeftCell: 'A2', activePane: 'bottomLeft', state: 'frozen' };
 
-      // 5. Format Saídas data
-      const saidasData = saidas.map(m => {
-        const dataFormatada = m.data || (m.criadoEm?.toDate ? format(m.criadoEm.toDate(), 'yyyy-MM-dd') : '—');
-        return {
-          'Data': dataFormatada,
-          'Código do Produto': m.produtoCodigo || '',
-          'Descrição do Produto': m.produtoDescricao || '',
-          'Quantidade': m.quantidade ?? 0,
-          'Unidade': m.unidade || '',
-          'Funcionário': m.funcionario || '—',
-          'Empresa': m.empresa || '—',
-          'Observação': m.observacao || '—',
-          'Registrado por': m.registradoPorEmail || '—'
-        };
+      // ── Sheet 3 — ENTRADAS ───────────────────────────────────────────────
+      const entHeaders = [
+        'Data', 'Código', 'Descrição do EPI', 'Qtd.', 'Unid.',
+        'Fornecedor', 'Nº Nota Fiscal', 'Observação', 'Registrado por',
+      ];
+      const entRows = entradas.map(m => {
+        const d = m.data || (m.criadoEm?.toDate ? format(m.criadoEm.toDate(), 'dd/MM/yyyy') : '—');
+        return [
+          d,
+          m.produtoCodigo   || '',
+          m.produtoDescricao || '',
+          m.quantidade       ?? 0,
+          m.unidade          || '',
+          m.fornecedor       || '—',
+          m.nfNumero         || '—',
+          m.observacao       || '—',
+          m.registradoPorEmail || '—',
+        ];
       });
+      const wsEntradas = buildSheet(entHeaders, entRows, [13, 10, 44, 7, 7, 30, 14, 30, 24], null);
+      wsEntradas['!freeze'] = { xSplit: 0, ySplit: 1, topLeftCell: 'A2', activePane: 'bottomLeft', state: 'frozen' };
 
-      // 6. Create Workbook
+      // ── Sheet 4 — SAÍDAS ─────────────────────────────────────────────────
+      const saidHeaders = [
+        'Data', 'Código', 'Descrição do EPI', 'Qtd.', 'Unid.',
+        'Funcionário', 'Empresa / Setor', 'Observação', 'Registrado por',
+      ];
+      const saidRows = saidas.map(m => {
+        const d = m.data || (m.criadoEm?.toDate ? format(m.criadoEm.toDate(), 'dd/MM/yyyy') : '—');
+        return [
+          d,
+          m.produtoCodigo    || '',
+          m.produtoDescricao || '',
+          m.quantidade        ?? 0,
+          m.unidade           || '',
+          m.funcionario       || '—',
+          m.empresa           || '—',
+          m.observacao        || '—',
+          m.registradoPorEmail || '—',
+        ];
+      });
+      const wsSaidas = buildSheet(saidHeaders, saidRows, [13, 10, 44, 7, 7, 28, 22, 30, 24], null);
+      wsSaidas['!freeze'] = { xSplit: 0, ySplit: 1, topLeftCell: 'A2', activePane: 'bottomLeft', state: 'frozen' };
+
+      // ── Workbook ─────────────────────────────────────────────────────────
       const wb = XLSX.utils.book_new();
-
-      // Convert arrays of objects to sheets
-      const wsEstoque = XLSX.utils.json_to_sheet(estoqueData);
-      const wsEntradas = XLSX.utils.json_to_sheet(entradasData);
-      const wsSaidas = XLSX.utils.json_to_sheet(saidasData);
-
-      // Append sheets to workbook
-      XLSX.utils.book_append_sheet(wb, wsEstoque, 'Estoque Atual');
+      XLSX.utils.book_append_sheet(wb, wsCapa,     'Resumo');
+      XLSX.utils.book_append_sheet(wb, wsEstoque,  'Estoque Atual');
       XLSX.utils.book_append_sheet(wb, wsEntradas, 'Entradas');
-      XLSX.utils.book_append_sheet(wb, wsSaidas, 'Saídas');
+      XLSX.utils.book_append_sheet(wb, wsSaidas,   'Saidas');
 
-      // Write and download
-      XLSX.writeFile(wb, `Relatorio_Controle_EPI_${format(new Date(), 'yyyyMMdd_HHmmss')}.xlsx`);
-      toast.success('Planilha exportada com sucesso!');
+      XLSX.writeFile(wb, `Relatorio_EPI_GEL_${format(new Date(), 'yyyyMMdd_HHmmss')}.xlsx`);
+      toast.success('Planilha profissional exportada com sucesso!');
     } catch (error) {
       console.error('Erro ao exportar Excel:', error);
       toast.error('Erro ao exportar planilha. Tente novamente.');
@@ -155,7 +379,7 @@ export default function Estoque() {
                 Gerando Excel...
               </>
             ) : (
-              <>🟢 Exportar Planilha</>
+              <>📊 Exportar Planilha</>
             )}
           </button>
           <button className="btn btn-primary" onClick={() => navigate('/produtos')} id="btn-novo-produto">
