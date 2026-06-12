@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
+import { filterProdutos } from '../utils/search';
 
 function getStatusBadge(produto) {
   const { estoqueAtual, estoqueMin, estoqueMax } = produto;
@@ -29,17 +30,13 @@ export default function Estoque() {
     load();
   }, []);
 
-  const filtered = produtos.filter(p => {
-    const matchSearch =
-      !search ||
-      p.descricao?.toLowerCase().includes(search.toLowerCase()) ||
-      String(p.codigo).includes(search);
-    const matchFilter =
-      filter === 'todos' ||
-      (filter === 'baixo' && p.estoqueAtual <= p.estoqueMin) ||
-      (filter === 'normal' && p.estoqueAtual > p.estoqueMin && p.estoqueAtual < p.estoqueMax) ||
-      (filter === 'alto' && p.estoqueAtual >= p.estoqueMax);
-    return matchSearch && matchFilter;
+  const searchFiltered = filterProdutos(produtos, search);
+  const filtered = searchFiltered.filter(p => {
+    if (filter === 'todos') return true;
+    if (filter === 'baixo') return p.estoqueAtual <= p.estoqueMin;
+    if (filter === 'normal') return p.estoqueAtual > p.estoqueMin && p.estoqueAtual < p.estoqueMax;
+    if (filter === 'alto') return p.estoqueAtual >= p.estoqueMax;
+    return true;
   });
 
   if (loading) return <div className="loading-center"><div className="loading-spin" /></div>;

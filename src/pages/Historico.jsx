@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy, where } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { format } from 'date-fns';
+import { matchSearch } from '../utils/search';
 
 export default function Historico() {
   const [movs, setMovs] = useState([]);
@@ -35,14 +36,18 @@ export default function Historico() {
   const filtered = movs.filter(m => {
     if (filters.tipo !== 'todos' && m.tipo !== filters.tipo) return false;
     if (filters.produto) {
-      const lower = filters.produto.toLowerCase();
-      if (!m.produtoDescricao?.toLowerCase().includes(lower) && !String(m.produtoCodigo).includes(lower)) return false;
+      const matchProd =
+        matchSearch(m.produtoDescricao, filters.produto) ||
+        matchSearch(String(m.produtoCodigo), filters.produto);
+      if (!matchProd) return false;
     }
     if (filters.responsavel) {
-      const lower = filters.responsavel.toLowerCase();
-      const funcMatch = m.funcionario?.toLowerCase().includes(lower);
-      const emailMatch = m.registradoPorEmail?.toLowerCase().includes(lower);
-      if (!funcMatch && !emailMatch) return false;
+      const matchResp =
+        matchSearch(m.funcionario, filters.responsavel) ||
+        matchSearch(m.registradoPorEmail, filters.responsavel) ||
+        matchSearch(m.fornecedor, filters.responsavel) ||
+        matchSearch(m.empresa, filters.responsavel);
+      if (!matchResp) return false;
     }
     if (filters.dataInicio && m.data < filters.dataInicio) return false;
     if (filters.dataFim && m.data > filters.dataFim) return false;

@@ -7,6 +7,7 @@ import { db } from '../firebase/config';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import { useSearchParams } from 'react-router-dom';
+import { filterProdutos } from '../utils/search';
 
 const GRUPOS = ['CONSUMO', 'PERMANENTE'];
 const UNIDADES = ['UND', 'PAR', 'CONJ', 'MTS', 'M'];
@@ -180,11 +181,7 @@ export default function Produtos() {
     }
   }
 
-  const filtered = produtos.filter(p =>
-    !search ||
-    p.descricao?.toLowerCase().includes(search.toLowerCase()) ||
-    String(p.codigo).includes(search)
-  );
+  const filtered = filterProdutos(produtos, search);
 
   if (loading) return <div className="loading-center"><div className="loading-spin" /></div>;
 
