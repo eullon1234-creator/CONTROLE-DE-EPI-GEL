@@ -3,11 +3,13 @@ import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { filterProdutos } from '../utils/search';
 
 export default function Imprimir() {
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [somenteEmEstoque, setSomenteEmEstoque] = useState(false);
   const [dataFicha, setDataFicha] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [titulo, setTitulo] = useState('FICHA DE SAÍDA DE EPI');
   const [local, setLocal] = useState('');
@@ -24,11 +26,8 @@ export default function Imprimir() {
     load();
   }, []);
 
-  const filtered = produtos.filter(p =>
-    !search ||
-    p.descricao?.toLowerCase().includes(search.toLowerCase()) ||
-    String(p.codigo).includes(search)
-  );
+  const filtered = filterProdutos(produtos, search)
+    .filter(p => !somenteEmEstoque || p.estoqueAtual > 0);
 
   const dataFormatada = dataFicha
     ? format(new Date(dataFicha + 'T12:00:00'), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })
@@ -72,9 +71,41 @@ export default function Imprimir() {
                 <input type="text" className="form-input" placeholder="Buscar por nome ou código..." value={search} onChange={e => setSearch(e.target.value)} id="input-filtro-imprimir" />
               </div>
             </div>
+
+            {/* Toggle — somente em estoque */}
+            <div className="form-group" style={{ display: 'flex', alignItems: 'flex-end' }}>
+              <button
+                type="button"
+                id="btn-toggle-estoque"
+                onClick={() => setSomenteEmEstoque(v => !v)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  padding: '0.55rem 1rem',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid',
+                  borderColor: somenteEmEstoque ? 'var(--accent-green)' : 'var(--border)',
+                  background: somenteEmEstoque ? 'rgba(16,185,129,0.12)' : 'var(--bg-input)',
+                  color: somenteEmEstoque ? 'var(--accent-green)' : 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  fontFamily: 'inherit',
+                  fontSize: '0.875rem',
+                  fontWeight: 600,
+                  transition: 'all 0.2s ease',
+                  whiteSpace: 'nowrap',
+                  width: '100%',
+                  justifyContent: 'center',
+                }}
+              >
+                <span style={{ fontSize: '1rem' }}>{somenteEmEstoque ? '✅' : '📦'}</span>
+                {somenteEmEstoque ? 'Somente em estoque (ativo)' : 'Somente em estoque'}
+              </button>
+            </div>
           </div>
           <p style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--text-muted)' }}>
-            📄 <strong style={{ color: 'var(--text-primary)' }}>{filtered.length}</strong> produto(s) serão impressos.
+            📄 <strong style={{ color: 'var(--text-primary)' }}>{filtered.length}</strong> produto(s) serão impressos
+            {somenteEmEstoque && <span style={{ color: 'var(--accent-green)', marginLeft: '0.35rem' }}>· somente com estoque &gt; 0</span>}.
           </p>
         </div>
       </div>
