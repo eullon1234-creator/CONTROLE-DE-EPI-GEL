@@ -47,27 +47,45 @@ export default function Estoque() {
       const now      = format(new Date(), "dd/MM/yyyy 'às' HH:mm");
       
       const totalValuation = produtos.reduce((sum, p) => sum + ((p.estoqueAtual ?? 0) * (p.valorUnitario ?? 0)), 0);
+      const totalSaidasValuation = saidas.reduce((sum, m) => {
+        const prod = produtos.find(p => p.codigo === m.produtoCodigo);
+        const price = prod ? (prod.valorUnitario ?? 0) : 0;
+        return sum + ((m.quantidade ?? 0) * price);
+      }, 0);
+
+      // Helper to calculate total exits value for a specific product
+      const getProductExitsTotal = (pId, price) => {
+        return saidas.filter(m => m.produtoId === pId).reduce((acc, m) => acc + (m.quantidade ?? 0) * price, 0);
+      };
 
       // ── Colour palette ───────────────────────────────────────────────────
       const C = {
-        azulEscuro : '1E3A5F',
-        azulMedio  : '2563A8',
-        azulClaro  : 'DBEAFE',
+        azulEscuro : '0F172A', // Navy/slate dark
+        azulMedio  : '1E293B', // Slate medium
+        azulClaro  : 'F1F5F9', // Soft light gray-blue background
+        azulDestaq : 'E2E8F0', // Highlight light gray
         branco     : 'FFFFFF',
         cinzaLinha : 'F8FAFC',
-        cinzaBorda : 'CBD5E1',
-        verdeCl    : 'DCFCE7',
-        verdeTxt   : '166534',
-        vermCl     : 'FEE2E2',
-        vermTxt    : '991B1B',
-        amarCl     : 'FEF9C3',
-        amarTxt    : '854D0E',
+        cinzaBorda : 'E2E8F0', // Very clean light border
+        verdeCl    : 'ECFDF5', // Emerald soft green background
+        verdeTxt   : '047857', // Emerald text
+        vermCl     : 'FEF2F2', // Soft red background
+        vermTxt    : 'B91C1C', // Dark red text
+        amarCl     : 'FFFBEB', // Soft amber background
+        amarTxt    : 'B45309', // Dark amber text
       };
 
       // ── Shared style factories ───────────────────────────────────────────
       const border = (color = C.cinzaBorda) => ({
         top   : { style: 'thin', color: { rgb: color } },
         bottom: { style: 'thin', color: { rgb: color } },
+        left  : { style: 'thin', color: { rgb: color } },
+        right : { style: 'thin', color: { rgb: color } },
+      });
+
+      const borderDouble = (color = C.cinzaBorda) => ({
+        top   : { style: 'thin', color: { rgb: color } },
+        bottom: { style: 'double', color: { rgb: color } },
         left  : { style: 'thin', color: { rgb: color } },
         right : { style: 'thin', color: { rgb: color } },
       });
@@ -136,21 +154,21 @@ export default function Estoque() {
       // Title block
       const titleRows = [
         { text: 'CONTROLE DE EPI — GEL ENGENHARIA', style: {
-          font     : { bold: true, sz: 22, color: { rgb: C.branco }, name: 'Calibri' },
+          font     : { bold: true, sz: 20, color: { rgb: C.branco }, name: 'Calibri' },
           fill     : { patternType: 'solid', fgColor: { rgb: C.azulEscuro } },
           alignment: { horizontal: 'center', vertical: 'center' },
-        }, hpt: 48 },
-        { text: 'Relatório de Estoque e Movimentações', style: {
-          font     : { sz: 14, color: { rgb: C.azulClaro }, name: 'Calibri' },
+        }, hpt: 44 },
+        { text: 'Relatório de Estoque e Movimentações Financeiras', style: {
+          font     : { sz: 12, color: { rgb: 'CCCCCC' }, name: 'Calibri' },
           fill     : { patternType: 'solid', fgColor: { rgb: C.azulEscuro } },
           alignment: { horizontal: 'center', vertical: 'center' },
-        }, hpt: 30 },
+        }, hpt: 26 },
         { text: `Gerado em: ${now}`, style: {
-          font     : { sz: 10, italic: true, color: { rgb: '6B7280' }, name: 'Calibri' },
-          fill     : { patternType: 'solid', fgColor: { rgb: C.cinzaLinha } },
+          font     : { sz: 9, italic: true, color: { rgb: '94A3B8' }, name: 'Calibri' },
+          fill     : { patternType: 'solid', fgColor: { rgb: C.azulEscuro } },
           alignment: { horizontal: 'center', vertical: 'center' },
-        }, hpt: 20 },
-        { text: '', style: {}, hpt: 10 }, // spacer
+        }, hpt: 22 },
+        { text: '', style: {}, hpt: 12 }, // spacer
       ];
 
       // Summary sections
@@ -166,12 +184,13 @@ export default function Estoque() {
         { label: 'Produtos com Estoque Baixo',    value: produtos.filter(p => p.estoqueAtual <= p.estoqueMin).length,   fill: C.vermCl,  txtColor: C.vermTxt },
         { label: 'Produtos com Estoque Normal',   value: produtos.filter(p => p.estoqueAtual > p.estoqueMin && p.estoqueAtual < p.estoqueMax).length, fill: C.verdeCl, txtColor: C.verdeTxt },
         { label: 'Produtos com Estoque Alto',     value: produtos.filter(p => p.estoqueAtual >= p.estoqueMax).length,   fill: C.amarCl,  txtColor: C.amarTxt },
-        { label: 'Valor Total Financeiro do Estoque', value: totalValuation, fill: C.azulClaro, txtColor: C.azulEscuro, isCurrency: true },
+        { label: 'Valor Total Financeiro do Estoque', value: totalValuation, fill: C.verdeCl, txtColor: C.verdeTxt, isCurrency: true, isDoubleBorder: true },
         { label: '', isBlank: true },
-        { label: 'MOVIMENTAÇÕES', isSection: true },
-        { label: 'Total de Entradas Registradas', value: entradas.length, fill: C.verdeCl, txtColor: C.verdeTxt },
-        { label: 'Total de Saídas Registradas',   value: saidas.length,   fill: C.vermCl,  txtColor: C.vermTxt },
-        { label: 'Total de Movimentações',         value: allMovs.length,  fill: C.branco },
+        { label: 'MOVIMENTAÇÕES (ACUMULADO)', isSection: true },
+        { label: 'Total de Entradas Registradas', value: entradas.length, fill: C.branco },
+        { label: 'Total de Saídas Registradas',   value: saidas.length,   fill: C.branco },
+        { label: 'Total de Movimentações (Misto)', value: allMovs.length,  fill: C.branco },
+        { label: 'Custo Total Acumulado de Saídas', value: totalSaidasValuation, fill: C.vermCl, txtColor: C.vermTxt, isCurrency: true, isDoubleBorder: true },
       ];
 
       let rowIdx = 0;
@@ -181,12 +200,13 @@ export default function Estoque() {
         const isBlank = text === '' && Object.keys(style).length === 0;
         if (!isBlank) {
           wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 0 })] = { v: text, t: 's', s: style };
+          wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 1 })] = { v: '', t: 's', style };
         }
         capaRowHeights.push({ hpt: hpt || 20 });
         rowIdx++;
       });
 
-      summaryRows.forEach(({ label, value, isSection, isBlank, fill, txtColor, isCurrency }) => {
+      summaryRows.forEach(({ label, value, isSection, isBlank, fill, txtColor, isCurrency, isDoubleBorder }) => {
         if (isBlank) {
           capaRowHeights.push({ hpt: 10 });
           rowIdx++;
@@ -194,19 +214,22 @@ export default function Estoque() {
         }
         if (isSection) {
           wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 0 })] = { v: label, t: 's', s: secHeaderStyle };
+          wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 1 })] = { v: '', t: 's', s: secHeaderStyle };
           capaRowHeights.push({ hpt: 24 });
           rowIdx++;
           return;
         }
+        const cellBorder = isDoubleBorder ? borderDouble() : border();
         const rowFill = { patternType: 'solid', fgColor: { rgb: fill || C.branco } };
+        
         wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 0 })] = {
           v: label, t: 's',
-          s: { font: { sz: 10, name: 'Calibri' }, fill: rowFill, border: border(), alignment: { horizontal: 'left', vertical: 'center' } },
+          s: { font: { bold: isDoubleBorder, sz: 10, name: 'Calibri' }, fill: rowFill, border: cellBorder, alignment: { horizontal: 'left', vertical: 'center' } },
         };
         wsCapa[XLSX.utils.encode_cell({ r: rowIdx, c: 1 })] = {
           v: value, t: 'n',
           z: isCurrency ? '"R$ "#,##0.00' : undefined,
-          s: { font: { bold: true, sz: 13, name: 'Calibri', color: { rgb: txtColor || C.azulEscuro } }, fill: rowFill, border: border(), alignment: { horizontal: isCurrency ? 'right' : 'center', vertical: 'center' } },
+          s: { font: { bold: true, sz: isDoubleBorder ? 12 : 11, name: 'Calibri', color: { rgb: txtColor || C.azulEscuro } }, fill: rowFill, border: cellBorder, alignment: { horizontal: isCurrency ? 'right' : 'center', vertical: 'center' } },
         };
         capaRowHeights.push({ hpt: 22 });
         rowIdx++;
@@ -217,19 +240,18 @@ export default function Estoque() {
         { s: { r: 0, c: 0 }, e: { r: 0, c: 1 } },
         { s: { r: 1, c: 0 }, e: { r: 1, c: 1 } },
         { s: { r: 2, c: 0 }, e: { r: 2, c: 1 } },
-        { s: { r: 3, c: 0 }, e: { r: 3, c: 1 } },
         { s: { r: 4, c: 0 }, e: { r: 4, c: 1 } },
-        { s: { r: 10, c: 0 }, e: { r: 10, c: 1 } },
+        { s: { r: 11, c: 0 }, e: { r: 11, c: 1 } },
       ];
       wsCapa['!ref']  = XLSX.utils.encode_range({ s: { c: 0, r: 0 }, e: { c: 1, r: rowIdx - 1 } });
-      wsCapa['!cols'] = [{ wch: 42 }, { wch: 18 }];
+      wsCapa['!cols'] = [{ wch: 44 }, { wch: 20 }];
       wsCapa['!rows'] = capaRowHeights;
 
       // ── Sheet 2 — ESTOQUE ATUAL ──────────────────────────────────────────
       const estoqueHeaders = [
         'Código', 'Descrição do EPI', 'Grupo / Categoria', 'Unid.',
         'Nº CA', 'Validade CA', 'Localização',
-        'Est. Mínimo', 'Est. Máximo', 'Valor Unitário', 'Valor Total', 'Est. Atual', 'Status',
+        'Est. Mínimo', 'Est. Máximo', 'Valor Unitário', 'Valor Total', 'Est. Atual', 'Compra Sugerida', 'Total de Saídas', 'Status',
       ];
       const estoqueRows = produtos.map(p => {
         let status = 'NORMAL';
@@ -238,6 +260,8 @@ export default function Estoque() {
         
         const vUnit = p.valorUnitario ?? 0;
         const vTotal = (p.estoqueAtual ?? 0) * vUnit;
+        const compraSugerida = p.estoqueAtual <= p.estoqueMin ? Math.max(0, (p.estoqueMax ?? 0) - (p.estoqueAtual ?? 0)) : 0;
+        const totalExitsCost = getProductExitsTotal(p.id, vUnit);
 
         return [
           p.codigo      || '',
@@ -252,12 +276,14 @@ export default function Estoque() {
           vUnit,
           vTotal,
           p.estoqueAtual ?? 0,
+          compraSugerida,
+          totalExitsCost,
           status,
         ];
       });
 
       const estoqueRowMeta = (row) => {
-        const status = row[12];
+        const status = row[14];
         if (status === 'ESTOQUE BAIXO') return { fill: C.vermCl, textColor: C.vermTxt };
         if (status === 'ESTOQUE ALTO')  return { fill: C.amarCl, textColor: C.amarTxt };
         return {};
@@ -265,50 +291,91 @@ export default function Estoque() {
 
       const wsEstoque = buildSheet(
         estoqueHeaders, estoqueRows,
-        [10, 42, 20, 7, 10, 13, 14, 11, 11, 14, 14, 12, 16],
+        [10, 42, 20, 7, 10, 13, 14, 11, 11, 14, 14, 12, 16, 16, 16],
         estoqueRowMeta
       );
 
-      // Override status column to be centered + bold pill style
+      // Custom cell styling for Estoque columns
       estoqueRows.forEach((row, ri) => {
-        const status  = row[12];
+        const status  = row[14];
         const isLow   = status === 'ESTOQUE BAIXO';
         const isHigh  = status === 'ESTOQUE ALTO';
         const fillClr = isLow ? C.vermCl : isHigh ? C.amarCl : C.verdeCl;
         const txtClr  = isLow ? C.vermTxt : isHigh ? C.amarTxt : C.verdeTxt;
-        
-        // Status Column (index 12)
-        wsEstoque[XLSX.utils.encode_cell({ r: ri + 1, c: 12 })] = {
+        const cellFill = isLow ? C.vermCl : (isHigh ? C.amarCl : (ri % 2 === 0 ? C.branco : C.cinzaLinha));
+
+        // Code (index 0) - centered
+        const codAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 0 });
+        if (wsEstoque[codAddr]) {
+          wsEstoque[codAddr].s = {
+            ...wsEstoque[codAddr].s,
+            alignment: { horizontal: 'center', vertical: 'center' }
+          };
+        }
+
+        // Validade CA (index 5) - centered
+        const valAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 5 });
+        if (wsEstoque[valAddr]) {
+          wsEstoque[valAddr].s = {
+            ...wsEstoque[valAddr].s,
+            alignment: { horizontal: 'center', vertical: 'center' }
+          };
+        }
+
+        // Valor Unitário (index 9) - BRL aligned right
+        const vUnitAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 9 });
+        wsEstoque[vUnitAddr] = {
+          v: row[9], t: 'n', z: '"R$ "#,##0.00',
+          s: { font: { sz: 9, name: 'Calibri', color: { rgb: isLow ? C.vermTxt : (isHigh ? C.amarTxt : '000000') } },
+               fill: { patternType: 'solid', fgColor: { rgb: cellFill } },
+               border: border(), alignment: { horizontal: 'right', vertical: 'center' } }
+        };
+
+        // Valor Total (index 10) - BRL aligned right bold
+        const vTotalAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 10 });
+        wsEstoque[vTotalAddr] = {
+          v: row[10], t: 'n', z: '"R$ "#,##0.00',
+          s: { font: { bold: true, sz: 10, name: 'Calibri', color: { rgb: isLow ? C.vermTxt : (isHigh ? C.amarTxt : '000000') } },
+               fill: { patternType: 'solid', fgColor: { rgb: cellFill } },
+               border: border(), alignment: { horizontal: 'right', vertical: 'center' } }
+        };
+
+        // Est. Atual (index 11) - bold colored
+        const estAtualAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 11 });
+        if (wsEstoque[estAtualAddr]) {
+          wsEstoque[estAtualAddr].s = {
+            ...wsEstoque[estAtualAddr].s,
+            font: { bold: true, sz: 11, name: 'Calibri', color: { rgb: isLow ? C.vermTxt : C.verdeTxt } },
+            alignment: { horizontal: 'center', vertical: 'center' }
+          };
+        }
+
+        // Compra Sugerida (index 12) - colored red if > 0
+        const compraAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 12 });
+        const needsCompra = row[12] > 0;
+        wsEstoque[compraAddr] = {
+          v: row[12], t: 'n',
+          s: { font: { bold: needsCompra, sz: 10, name: 'Calibri', color: { rgb: needsCompra ? C.vermTxt : '000000' } },
+               fill: { patternType: 'solid', fgColor: { rgb: needsCompra ? C.vermCl : (ri % 2 === 0 ? C.branco : C.cinzaLinha) } },
+               border: border(), alignment: { horizontal: 'center', vertical: 'center' } }
+        };
+
+        // Total de Saídas (index 13) - BRL aligned right
+        const tSaidasAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 13 });
+        wsEstoque[tSaidasAddr] = {
+          v: row[13], t: 'n', z: '"R$ "#,##0.00',
+          s: { font: { sz: 9, name: 'Calibri' },
+               fill: { patternType: 'solid', fgColor: { rgb: ri % 2 === 0 ? C.branco : C.cinzaLinha } },
+               border: border(), alignment: { horizontal: 'right', vertical: 'center' } }
+        };
+
+        // Status Column (index 14)
+        wsEstoque[XLSX.utils.encode_cell({ r: ri + 1, c: 14 })] = {
           v: status, t: 's',
           s: { font: { bold: true, sz: 9, name: 'Calibri', color: { rgb: txtClr } },
                fill: { patternType: 'solid', fgColor: { rgb: fillClr } },
                border: border(),
                alignment: { horizontal: 'center', vertical: 'center' } },
-        };
-
-        // Valor Unitário (index 9)
-        const vUnitAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 9 });
-        wsEstoque[vUnitAddr] = {
-          v: row[9], t: 'n', z: '"R$ "#,##0.00',
-          s: { font: { sz: 9, name: 'Calibri', color: { rgb: isLow ? C.vermTxt : (isHigh ? C.amarTxt : '000000') } },
-               fill: { patternType: 'solid', fgColor: { rgb: isLow ? C.vermCl : (isHigh ? C.amarCl : (ri % 2 === 0 ? C.branco : C.cinzaLinha)) } },
-               border: border(), alignment: { horizontal: 'right', vertical: 'center' } }
-        };
-
-        // Valor Total (index 10)
-        const vTotalAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 10 });
-        wsEstoque[vTotalAddr] = {
-          v: row[10], t: 'n', z: '"R$ "#,##0.00',
-          s: { font: { bold: true, sz: 10, name: 'Calibri', color: { rgb: isLow ? C.vermTxt : (isHigh ? C.amarTxt : '000000') } },
-               fill: { patternType: 'solid', fgColor: { rgb: isLow ? C.vermCl : (isHigh ? C.amarCl : (ri % 2 === 0 ? C.branco : C.cinzaLinha)) } },
-               border: border(), alignment: { horizontal: 'right', vertical: 'center' } }
-        };
-
-        // Est. Atual (index 11): bold + colored
-        const estAtualAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 11 });
-        wsEstoque[estAtualAddr].s = {
-          ...wsEstoque[estAtualAddr].s,
-          font: { bold: true, sz: 11, name: 'Calibri', color: { rgb: isLow ? C.vermTxt : C.verdeTxt } },
         };
       });
 
@@ -338,6 +405,12 @@ export default function Estoque() {
       const wsEntradas = buildSheet(entHeaders, entRows, [13, 10, 44, 7, 7, 14, 14, 30, 14, 30, 24], null);
       
       entRows.forEach((row, ri) => {
+        // Center Data (index 0) and Code (index 1)
+        const dAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 0 });
+        if (wsEntradas[dAddr]) wsEntradas[dAddr].s.alignment = { horizontal: 'center', vertical: 'center' };
+        const cAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 1 });
+        if (wsEntradas[cAddr]) wsEntradas[cAddr].s.alignment = { horizontal: 'center', vertical: 'center' };
+
         // Valor Unitário (index 5)
         const vUnitAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 5 });
         wsEntradas[vUnitAddr] = {
@@ -374,6 +447,15 @@ export default function Estoque() {
         ];
       });
       const wsSaidas = buildSheet(saidHeaders, saidRows, [13, 10, 44, 7, 7, 28, 22, 30, 24], null);
+      
+      saidRows.forEach((row, ri) => {
+        // Center Data (index 0) and Code (index 1)
+        const dAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 0 });
+        if (wsSaidas[dAddr]) wsSaidas[dAddr].s.alignment = { horizontal: 'center', vertical: 'center' };
+        const cAddr = XLSX.utils.encode_cell({ r: ri + 1, c: 1 });
+        if (wsSaidas[cAddr]) wsSaidas[cAddr].s.alignment = { horizontal: 'center', vertical: 'center' };
+      });
+      
       wsSaidas['!freeze'] = { xSplit: 0, ySplit: 1, topLeftCell: 'A2', activePane: 'bottomLeft', state: 'frozen' };
 
       // ── Workbook ─────────────────────────────────────────────────────────
