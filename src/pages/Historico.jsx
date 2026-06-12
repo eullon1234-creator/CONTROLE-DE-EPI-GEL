@@ -55,7 +55,7 @@ export default function Historico() {
   });
 
   return (
-    <div>
+    <div className="page-enter">
       <div className="page-header">
         <div>
           <h1 className="page-title">📋 Histórico</h1>

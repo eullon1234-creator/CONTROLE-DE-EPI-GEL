@@ -6,7 +6,6 @@ export default function Importar() {
   const [progress, setProgress] = useState({ done: 0, total: 0 });
   const [result, setResult] = useState(null);
   const [importarSaldos, setImportarSaldos] = useState(true);
-  const [importarPrecos, setImportarPrecos] = useState(true);
 
   async function handleImport() {
     if (!confirm('Isso vai cadastrar 252 produtos no banco de dados.\nContinuar?')) return;
@@ -14,7 +13,7 @@ export default function Importar() {
     setProgress({ done: 0, total: 252 });
 
     try {
-      const res = await seedProducts({ importarSaldos, importarPrecos }, (done, total) => {
+      const res = await seedProducts({ importarSaldos }, (done, total) => {
         setProgress({ done, total });
       });
 
@@ -34,7 +33,7 @@ export default function Importar() {
   const pct = progress.total > 0 ? Math.round((progress.done / progress.total) * 100) : 0;
 
   return (
-    <div>
+    <div className="page-enter">
       <div className="page-header">
         <div>
           <h1 className="page-title">📥 Importar Produtos</h1>
@@ -59,7 +58,6 @@ export default function Importar() {
           <li>✅ Unidade de medida (UND, PAR, CONJ...)</li>
           <li>✅ Estoque mínimo e máximo</li>
           <li>{importarSaldos ? '✅ Saldo de estoque inicial da planilha' : '⚠️ Estoque atual = 0 (você controla pelo app)'}</li>
-          <li>{importarPrecos ? '✅ Valor Unitário (preços originais da planilha)' : '⚠️ Sem preços unitários cadastrados'}</li>
         </ul>
 
         {status === 'idle' && (
@@ -72,15 +70,6 @@ export default function Importar() {
                 style={{ cursor: 'pointer', transform: 'scale(1.2)' }}
               />
               <span>Importar estoque atual (saldos originais da planilha)</span>
-            </label>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', cursor: 'pointer', fontSize: '0.875rem', color: 'var(--text-primary)' }}>
-              <input
-                type="checkbox"
-                checked={importarPrecos}
-                onChange={e => setImportarPrecos(e.target.checked)}
-                style={{ cursor: 'pointer', transform: 'scale(1.2)' }}
-              />
-              <span>Importar preços unitários (valores originais da planilha)</span>
             </label>
           </div>
         )}

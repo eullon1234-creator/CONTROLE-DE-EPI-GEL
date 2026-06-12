@@ -15,7 +15,6 @@ export default function Entrada() {
   const [form, setForm] = useState({
     data: format(new Date(), 'yyyy-MM-dd'),
     quantidade: '',
-    valorUnitario: '',
     fornecedor: '',
     nfNumero: '',
     observacao: '',
@@ -60,7 +59,6 @@ export default function Entrada() {
 
     setLoading(true);
     try {
-      const valorUnit = parseFloat(form.valorUnitario) || 0;
       await addDoc(collection(db, 'movimentacoes'), {
         tipo: 'ENTRADA',
         data: form.data,
@@ -69,8 +67,6 @@ export default function Entrada() {
         produtoDescricao: selected.descricao,
         unidade: selected.unidade,
         quantidade: qty,
-        valorUnitario: valorUnit || null,
-        custo: valorUnit ? valorUnit * qty : null,
         fornecedor: form.fornecedor || null,
         nfNumero: form.nfNumero || null,
         observacao: form.observacao || null,
@@ -84,7 +80,7 @@ export default function Entrada() {
       });
 
       toast.success(`Entrada de ${qty} ${selected.unidade} registrada!`);
-      setForm(f => ({ ...f, quantidade: '', valorUnitario: '', fornecedor: '', nfNumero: '', observacao: '' }));
+      setForm(f => ({ ...f, quantidade: '', fornecedor: '', nfNumero: '', observacao: '' }));
       setSelected(null);
       loadRecentes();
     } catch (err) {
@@ -96,7 +92,7 @@ export default function Entrada() {
   }
 
   return (
-    <div>
+    <div className="page-enter">
       <div className="page-header">
         <div>
           <h1 className="page-title">📥 Registrar Entrada</h1>
@@ -128,11 +124,6 @@ export default function Entrada() {
             <div className="form-group">
               <label className="form-label">Quantidade *</label>
               <input type="number" name="quantidade" className="form-input" placeholder="0" min="1" value={form.quantidade} onChange={handleField} required id="input-quantidade-entrada" />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Valor Unitário (R$) <span>(opcional)</span></label>
-              <input type="number" name="valorUnitario" className="form-input" placeholder="0,00" min="0" step="0.01" value={form.valorUnitario} onChange={handleField} id="input-valor-unitario" />
             </div>
 
             <div className="form-group">
@@ -172,7 +163,7 @@ export default function Entrada() {
           <div className="table-wrapper">
             <table>
               <thead>
-                <tr><th>Produto</th><th>Qtd</th><th>Valor Unit.</th><th>Custo Total</th><th>Fornecedor</th><th>NF</th><th>Horário</th></tr>
+                <tr><th>Produto</th><th>Qtd</th><th>Fornecedor</th><th>NF</th><th>Horário</th></tr>
               </thead>
               <tbody>
                 {recentes.map(m => (
@@ -182,12 +173,6 @@ export default function Entrada() {
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Cód. {m.produtoCodigo}</div>
                     </td>
                     <td><strong>{m.quantidade}</strong> {m.unidade}</td>
-                    <td style={{ color: 'var(--text-secondary)', fontSize: '0.8125rem' }}>
-                      {m.valorUnitario ? `R$ ${m.valorUnitario.toFixed(2)}` : '—'}
-                    </td>
-                    <td style={{ color: 'var(--accent-green)', fontSize: '0.8125rem', fontWeight: 600 }}>
-                      {m.custo ? `R$ ${m.custo.toFixed(2)}` : '—'}
-                    </td>
                     <td style={{ color: 'var(--text-secondary)', fontSize: '0.8125rem' }}>{m.fornecedor || '—'}</td>
                     <td style={{ color: 'var(--text-muted)', fontSize: '0.8125rem' }}>{m.nfNumero || '—'}</td>
                     <td style={{ color: 'var(--text-muted)', fontSize: '0.8125rem', whiteSpace: 'nowrap' }}>

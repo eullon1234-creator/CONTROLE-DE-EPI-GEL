@@ -3,7 +3,7 @@ import { db } from './config';
 import seedData from './seed_data.json';
 
 export async function seedProducts(optionsOrProgress, onProgressCallback) {
-  let options = { importarSaldos: false, importarPrecos: false };
+  let options = { importarSaldos: false };
   let onProgress = onProgressCallback;
 
   if (typeof optionsOrProgress === 'function') {
@@ -25,7 +25,6 @@ export async function seedProducts(optionsOrProgress, onProgressCallback) {
     const finalProduct = {
       ...product,
       estoqueAtual: options.importarSaldos ? (product.estoqueAtual ?? 0) : 0,
-      valorUnitario: options.importarPrecos ? (product.valorUnitario ?? 0) : 0,
     };
 
     await addDoc(collection(db, 'produtos'), {

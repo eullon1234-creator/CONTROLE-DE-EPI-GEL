@@ -8,8 +8,7 @@
     "unidade": "UND",
     "estoqueMin": 80,
     "estoqueMax": 300,
-    "estoqueAtual": 25,
-    "valorUnitario": 0.0
+    "estoqueAtual": 25
   },
   {
     "codigo": 158,
@@ -20,8 +19,7 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 300,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 190,
@@ -32,8 +30,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 144,
-    "valorUnitario": 0.0
+    "estoqueAtual": 144
   },
   {
     "codigo": 2,
@@ -44,8 +41,7 @@
     "unidade": "UND",
     "estoqueMin": 60,
     "estoqueMax": 100,
-    "estoqueAtual": 16,
-    "valorUnitario": 49.0
+    "estoqueAtual": 16
   },
   {
     "codigo": 3,
@@ -56,8 +52,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 228,
@@ -68,8 +63,7 @@
     "unidade": "UND",
     "estoqueMin": 1,
     "estoqueMax": 1000,
-    "estoqueAtual": 146,
-    "valorUnitario": 5.638424821002387
+    "estoqueAtual": 146
   },
   {
     "codigo": 4,
@@ -80,8 +74,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 3.531538461538461
+    "estoqueAtual": 0
   },
   {
     "codigo": 268,
@@ -92,8 +85,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 20,
-    "estoqueAtual": 17,
-    "valorUnitario": 0.0
+    "estoqueAtual": 17
   },
   {
     "codigo": 171,
@@ -104,8 +96,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 20,
-    "estoqueAtual": 15,
-    "valorUnitario": 0.0
+    "estoqueAtual": 15
   },
   {
     "codigo": 172,
@@ -116,8 +107,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 20,
-    "estoqueAtual": 1,
-    "valorUnitario": 0.0
+    "estoqueAtual": 1
   },
   {
     "codigo": 173,
@@ -128,8 +118,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 174,
@@ -140,8 +129,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 20,
-    "estoqueAtual": 9,
-    "valorUnitario": 0.0
+    "estoqueAtual": 9
   },
   {
     "codigo": 5,
@@ -152,8 +140,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 6,
@@ -164,8 +151,7 @@
     "unidade": "PAR",
     "estoqueMin": 30,
     "estoqueMax": 100,
-    "estoqueAtual": 4,
-    "valorUnitario": 0.0
+    "estoqueAtual": 4
   },
   {
     "codigo": 7,
@@ -176,8 +162,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 10.723809523809523
+    "estoqueAtual": 0
   },
   {
     "codigo": 8,
@@ -188,8 +173,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 9,
@@ -200,8 +184,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 10,
@@ -212,8 +195,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 6.929230769230769
+    "estoqueAtual": 0
   },
   {
     "codigo": 11,
@@ -224,8 +206,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 20.47272727272727
+    "estoqueAtual": 0
   },
   {
     "codigo": 12,
@@ -236,8 +217,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 3.51875
+    "estoqueAtual": 0
   },
   {
     "codigo": 13,
@@ -248,8 +228,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 250,
-    "estoqueAtual": 6,
-    "valorUnitario": 21.653846153846153
+    "estoqueAtual": 6
   },
   {
     "codigo": 14,
@@ -260,8 +239,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 250,
-    "estoqueAtual": 10,
-    "valorUnitario": 4.3307692307692305
+    "estoqueAtual": 10
   },
   {
     "codigo": 165,
@@ -272,8 +250,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 15,
@@ -284,8 +261,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 166,
@@ -296,8 +272,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 167,
@@ -308,8 +283,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 168,
@@ -320,8 +294,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 16,
@@ -332,8 +305,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 34.9
+    "estoqueAtual": 0
   },
   {
     "codigo": 17,
@@ -344,8 +316,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 23.266666666666666
+    "estoqueAtual": 0
   },
   {
     "codigo": 18,
@@ -356,8 +327,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 19,
@@ -368,8 +338,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 8.053846153846154
+    "estoqueAtual": 0
   },
   {
     "codigo": 20,
@@ -380,8 +349,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 15,
-    "valorUnitario": 18.096296296296295
+    "estoqueAtual": 15
   },
   {
     "codigo": 21,
@@ -392,8 +360,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 15,
-    "valorUnitario": 0.0
+    "estoqueAtual": 15
   },
   {
     "codigo": 22,
@@ -404,8 +371,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 23,
@@ -416,8 +382,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 24,
@@ -428,8 +393,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 25,
@@ -440,8 +404,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 151,
@@ -452,8 +415,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 10,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 152,
@@ -464,8 +426,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 10,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 153,
@@ -476,8 +437,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 10,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 154,
@@ -488,8 +448,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 10,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 26,
@@ -500,8 +459,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 10,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 27,
@@ -512,8 +470,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 25,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 28,
@@ -524,8 +481,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 25,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 29,
@@ -536,8 +492,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 15,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 30,
@@ -548,8 +503,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 15,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 31,
@@ -560,8 +514,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 15,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 162,
@@ -572,8 +525,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 15,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 163,
@@ -584,8 +536,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 15,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 32,
@@ -596,8 +547,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 15,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 164,
@@ -608,8 +558,7 @@
     "unidade": "PAR",
     "estoqueMin": 10,
     "estoqueMax": 15,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 33,
@@ -620,8 +569,7 @@
     "unidade": "PAR",
     "estoqueMin": 30,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 34,
@@ -632,8 +580,7 @@
     "unidade": "PAR",
     "estoqueMin": 30,
     "estoqueMax": 80,
-    "estoqueAtual": 0,
-    "valorUnitario": 44.785714285714285
+    "estoqueAtual": 0
   },
   {
     "codigo": 35,
@@ -644,8 +591,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 13,
-    "valorUnitario": 0.0
+    "estoqueAtual": 13
   },
   {
     "codigo": 36,
@@ -656,8 +602,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 11,
-    "valorUnitario": 14.581395348837209
+    "estoqueAtual": 11
   },
   {
     "codigo": 37,
@@ -668,8 +613,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 9,
-    "valorUnitario": 9.564406779661018
+    "estoqueAtual": 9
   },
   {
     "codigo": 38,
@@ -680,8 +624,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0,
-    "valorUnitario": 38.58461538461539
+    "estoqueAtual": 0
   },
   {
     "codigo": 39,
@@ -692,8 +635,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0,
-    "valorUnitario": 28.01489361702128
+    "estoqueAtual": 0
   },
   {
     "codigo": 40,
@@ -704,8 +646,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 28,
-    "valorUnitario": 12.375
+    "estoqueAtual": 28
   },
   {
     "codigo": 41,
@@ -716,8 +657,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 3,
-    "valorUnitario": 16.634693877551022
+    "estoqueAtual": 3
   },
   {
     "codigo": 42,
@@ -728,8 +668,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 9,
-    "valorUnitario": 31.900000000000002
+    "estoqueAtual": 9
   },
   {
     "codigo": 43,
@@ -740,8 +679,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 5,
-    "valorUnitario": 33.0
+    "estoqueAtual": 5
   },
   {
     "codigo": 44,
@@ -752,8 +690,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 4,
-    "valorUnitario": 0.0
+    "estoqueAtual": 4
   },
   {
     "codigo": 249,
@@ -764,8 +701,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 213,
@@ -776,8 +712,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 237,
@@ -788,8 +723,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 120.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 238,
@@ -800,8 +734,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 120.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 239,
@@ -812,8 +745,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 240,
@@ -824,8 +756,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 241,
@@ -836,8 +767,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 120.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 242,
@@ -848,8 +778,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 120.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 243,
@@ -860,8 +789,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 244,
@@ -872,8 +800,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 120.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 245,
@@ -884,8 +811,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 246,
@@ -896,8 +822,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 247,
@@ -908,8 +833,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 250,
@@ -920,8 +844,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 248,
@@ -932,8 +855,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 212,
@@ -944,8 +866,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 214,
@@ -956,8 +877,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 215,
@@ -968,8 +888,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 216,
@@ -980,8 +899,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 52,
-    "valorUnitario": 0.0
+    "estoqueAtual": 52
   },
   {
     "codigo": 217,
@@ -992,8 +910,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 22,
-    "valorUnitario": 0.0
+    "estoqueAtual": 22
   },
   {
     "codigo": 218,
@@ -1004,8 +921,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 1,
-    "valorUnitario": 0.0
+    "estoqueAtual": 1
   },
   {
     "codigo": 219,
@@ -1016,8 +932,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 220,
@@ -1028,8 +943,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 221,
@@ -1040,8 +954,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0,
-    "valorUnitario": 56.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 222,
@@ -1052,8 +965,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 10,
-    "valorUnitario": 0.0
+    "estoqueAtual": 10
   },
   {
     "codigo": 223,
@@ -1064,8 +976,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0,
-    "valorUnitario": 80.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 45,
@@ -1076,8 +987,7 @@
     "unidade": "UND",
     "estoqueMin": 30,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 201,
@@ -1088,8 +998,7 @@
     "unidade": "UND",
     "estoqueMin": 30,
     "estoqueMax": 200,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 46,
@@ -1100,8 +1009,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 104,
-    "valorUnitario": 2.697470489038786
+    "estoqueAtual": 104
   },
   {
     "codigo": 47,
@@ -1112,8 +1020,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 141,
-    "valorUnitario": 12.207538802660755
+    "estoqueAtual": 141
   },
   {
     "codigo": 48,
@@ -1124,8 +1031,7 @@
     "unidade": "UND",
     "estoqueMin": 200,
     "estoqueMax": 250,
-    "estoqueAtual": 19,
-    "valorUnitario": 0.5928286852589641
+    "estoqueAtual": 19
   },
   {
     "codigo": 49,
@@ -1136,8 +1042,7 @@
     "unidade": "UND",
     "estoqueMin": 150,
     "estoqueMax": 250,
-    "estoqueAtual": 46,
-    "valorUnitario": 1.831818181818182
+    "estoqueAtual": 46
   },
   {
     "codigo": 50,
@@ -1148,8 +1053,7 @@
     "unidade": "UND",
     "estoqueMin": 150,
     "estoqueMax": 250,
-    "estoqueAtual": 165,
-    "valorUnitario": 10.044
+    "estoqueAtual": 165
   },
   {
     "codigo": 51,
@@ -1160,8 +1064,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 30,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 54,
@@ -1172,8 +1075,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 13,
-    "valorUnitario": 0.0
+    "estoqueAtual": 13
   },
   {
     "codigo": 52,
@@ -1184,8 +1086,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 10,
-    "valorUnitario": 0.0
+    "estoqueAtual": 10
   },
   {
     "codigo": 202,
@@ -1196,8 +1097,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 8,
-    "valorUnitario": 0.0
+    "estoqueAtual": 8
   },
   {
     "codigo": 53,
@@ -1208,8 +1108,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 30,
-    "estoqueAtual": 11,
-    "valorUnitario": 0.0
+    "estoqueAtual": 11
   },
   {
     "codigo": 55,
@@ -1220,8 +1119,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 17,
-    "valorUnitario": 0.0
+    "estoqueAtual": 17
   },
   {
     "codigo": 56,
@@ -1232,8 +1130,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 69.9
+    "estoqueAtual": 0
   },
   {
     "codigo": 57,
@@ -1244,8 +1141,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 58,
@@ -1256,8 +1152,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 6.354545454545455
+    "estoqueAtual": 0
   },
   {
     "codigo": 59,
@@ -1268,8 +1163,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 40,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 60,
@@ -1280,8 +1174,7 @@
     "unidade": "UND",
     "estoqueMin": 40,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 69.9
+    "estoqueAtual": 0
   },
   {
     "codigo": 61,
@@ -1292,8 +1185,7 @@
     "unidade": "UND",
     "estoqueMin": 40,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 62,
@@ -1304,8 +1196,7 @@
     "unidade": "UND",
     "estoqueMin": 40,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 63,
@@ -1316,8 +1207,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 204,
@@ -1328,8 +1218,7 @@
     "unidade": "UND",
     "estoqueMin": 30,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 203,
@@ -1340,8 +1229,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 185,
@@ -1352,8 +1240,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 8,
-    "valorUnitario": 0.0
+    "estoqueAtual": 8
   },
   {
     "codigo": 64,
@@ -1364,8 +1251,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 10,
-    "valorUnitario": 31.23076923076923
+    "estoqueAtual": 10
   },
   {
     "codigo": 184,
@@ -1376,8 +1262,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 7,
-    "valorUnitario": 0.0
+    "estoqueAtual": 7
   },
   {
     "codigo": 65,
@@ -1388,8 +1273,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 9,
-    "valorUnitario": 0.0
+    "estoqueAtual": 9
   },
   {
     "codigo": 66,
@@ -1400,8 +1284,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 50,
-    "estoqueAtual": 8,
-    "valorUnitario": 0.0
+    "estoqueAtual": 8
   },
   {
     "codigo": 199,
@@ -1412,8 +1295,7 @@
     "unidade": "UND",
     "estoqueMin": 30,
     "estoqueMax": 250,
-    "estoqueAtual": 5,
-    "valorUnitario": 0.0
+    "estoqueAtual": 5
   },
   {
     "codigo": 67,
@@ -1424,8 +1306,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 84,
-    "valorUnitario": 6.026509572901326
+    "estoqueAtual": 84
   },
   {
     "codigo": 68,
@@ -1436,8 +1317,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 258,
-    "valorUnitario": 8.803053435114505
+    "estoqueAtual": 258
   },
   {
     "codigo": 69,
@@ -1448,8 +1328,7 @@
     "unidade": "UND",
     "estoqueMin": 200,
     "estoqueMax": 250,
-    "estoqueAtual": 49,
-    "valorUnitario": 4.123373493975904
+    "estoqueAtual": 49
   },
   {
     "codigo": 70,
@@ -1460,8 +1339,7 @@
     "unidade": "UND",
     "estoqueMin": 150,
     "estoqueMax": 250,
-    "estoqueAtual": 245,
-    "valorUnitario": 5.468912710566616
+    "estoqueAtual": 245
   },
   {
     "codigo": 71,
@@ -1472,8 +1350,7 @@
     "unidade": "UND",
     "estoqueMin": 150,
     "estoqueMax": 250,
-    "estoqueAtual": 63,
-    "valorUnitario": 31.47692307692308
+    "estoqueAtual": 63
   },
   {
     "codigo": 200,
@@ -1484,8 +1361,7 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 200,
-    "estoqueAtual": 15,
-    "valorUnitario": 4.376470588235295
+    "estoqueAtual": 15
   },
   {
     "codigo": 72,
@@ -1496,8 +1372,7 @@
     "unidade": "UND",
     "estoqueMin": 200,
     "estoqueMax": 400,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.9546666666666666
+    "estoqueAtual": 0
   },
   {
     "codigo": 73,
@@ -1508,8 +1383,7 @@
     "unidade": "UND",
     "estoqueMin": 200,
     "estoqueMax": 400,
-    "estoqueAtual": 175,
-    "valorUnitario": 1.1029036827195466
+    "estoqueAtual": 175
   },
   {
     "codigo": 74,
@@ -1520,8 +1394,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 30,
-    "estoqueAtual": 22,
-    "valorUnitario": 0.0
+    "estoqueAtual": 22
   },
   {
     "codigo": 75,
@@ -1532,8 +1405,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 30,
-    "estoqueAtual": 5,
-    "valorUnitario": 15.838666666666665
+    "estoqueAtual": 5
   },
   {
     "codigo": 76,
@@ -1544,8 +1416,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 30,
-    "estoqueAtual": 3,
-    "valorUnitario": 4.848571428571428
+    "estoqueAtual": 3
   },
   {
     "codigo": 77,
@@ -1556,8 +1427,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 7,
-    "valorUnitario": 15.970000000000002
+    "estoqueAtual": 7
   },
   {
     "codigo": 78,
@@ -1568,8 +1438,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 177,
@@ -1580,8 +1449,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 18,
-    "valorUnitario": 15.97
+    "estoqueAtual": 18
   },
   {
     "codigo": 176,
@@ -1592,8 +1460,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 175,
@@ -1604,8 +1471,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 179,
@@ -1616,8 +1482,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 7,
-    "valorUnitario": 0.0
+    "estoqueAtual": 7
   },
   {
     "codigo": 183,
@@ -1628,8 +1493,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 180,
@@ -1640,8 +1504,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0,
-    "valorUnitario": 14.091176470588236
+    "estoqueAtual": 0
   },
   {
     "codigo": 182,
@@ -1652,8 +1515,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 181,
@@ -1664,8 +1526,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 20,
-    "valorUnitario": 14.51818181818182
+    "estoqueAtual": 20
   },
   {
     "codigo": 178,
@@ -1676,8 +1537,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 25,
-    "valorUnitario": 8.834468085106383
+    "estoqueAtual": 25
   },
   {
     "codigo": 79,
@@ -1688,8 +1548,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 17,
-    "valorUnitario": 0.0
+    "estoqueAtual": 17
   },
   {
     "codigo": 80,
@@ -1700,8 +1559,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 81,
@@ -1712,8 +1570,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 4,
-    "valorUnitario": 0.0
+    "estoqueAtual": 4
   },
   {
     "codigo": 82,
@@ -1724,8 +1581,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 8,
-    "valorUnitario": 0.0
+    "estoqueAtual": 8
   },
   {
     "codigo": 83,
@@ -1736,8 +1592,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 15,
-    "valorUnitario": 0.0
+    "estoqueAtual": 15
   },
   {
     "codigo": 84,
@@ -1748,8 +1603,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 8,
-    "valorUnitario": 0.0
+    "estoqueAtual": 8
   },
   {
     "codigo": 85,
@@ -1760,8 +1614,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 86,
@@ -1772,8 +1625,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 20,
-    "valorUnitario": 0.0
+    "estoqueAtual": 20
   },
   {
     "codigo": 140,
@@ -1784,8 +1636,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 3,
-    "valorUnitario": 0.0
+    "estoqueAtual": 3
   },
   {
     "codigo": 87,
@@ -1796,8 +1647,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 4,
-    "valorUnitario": 10.828571428571427
+    "estoqueAtual": 4
   },
   {
     "codigo": 88,
@@ -1808,8 +1658,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 4,
-    "valorUnitario": 0.0
+    "estoqueAtual": 4
   },
   {
     "codigo": 89,
@@ -1820,8 +1669,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 3,
-    "valorUnitario": 0.0
+    "estoqueAtual": 3
   },
   {
     "codigo": 90,
@@ -1832,8 +1680,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 91,
@@ -1844,8 +1691,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 3,
-    "valorUnitario": 13.475555555555555
+    "estoqueAtual": 3
   },
   {
     "codigo": 92,
@@ -1856,8 +1702,7 @@
     "unidade": "UND",
     "estoqueMin": 0,
     "estoqueMax": 0,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 93,
@@ -1868,8 +1713,7 @@
     "unidade": "UND",
     "estoqueMin": 300,
     "estoqueMax": 500,
-    "estoqueAtual": 14,
-    "valorUnitario": 0.0
+    "estoqueAtual": 14
   },
   {
     "codigo": 94,
@@ -1880,8 +1724,7 @@
     "unidade": "UND",
     "estoqueMin": 30,
     "estoqueMax": 300,
-    "estoqueAtual": 78,
-    "valorUnitario": 15.16
+    "estoqueAtual": 78
   },
   {
     "codigo": 95,
@@ -1892,8 +1735,7 @@
     "unidade": "UND",
     "estoqueMin": 300,
     "estoqueMax": 500,
-    "estoqueAtual": 0,
-    "valorUnitario": 12.1
+    "estoqueAtual": 0
   },
   {
     "codigo": 264,
@@ -1904,8 +1746,7 @@
     "unidade": "UND",
     "estoqueMin": 0,
     "estoqueMax": 0,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 266,
@@ -1916,8 +1757,7 @@
     "unidade": "UND",
     "estoqueMin": 0,
     "estoqueMax": 0,
-    "estoqueAtual": 2,
-    "valorUnitario": 0.0
+    "estoqueAtual": 2
   },
   {
     "codigo": 96,
@@ -1928,8 +1768,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 31.146315789473686
+    "estoqueAtual": 0
   },
   {
     "codigo": 233,
@@ -1940,8 +1779,7 @@
     "unidade": "UND",
     "estoqueMin": 0,
     "estoqueMax": 0,
-    "estoqueAtual": 3,
-    "valorUnitario": 0.0
+    "estoqueAtual": 3
   },
   {
     "codigo": 210,
@@ -1952,8 +1790,7 @@
     "unidade": "UND",
     "estoqueMin": 60,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 186,
@@ -1964,8 +1801,7 @@
     "unidade": "UND",
     "estoqueMin": 60,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 97,
@@ -1976,8 +1812,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 250,
-    "estoqueAtual": 32,
-    "valorUnitario": 4.8604651162790695
+    "estoqueAtual": 32
   },
   {
     "codigo": 188,
@@ -1988,8 +1823,7 @@
     "unidade": "UND",
     "estoqueMin": 60,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 13.571428571428571
+    "estoqueAtual": 0
   },
   {
     "codigo": 98,
@@ -2000,8 +1834,7 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 500,
-    "estoqueAtual": 0,
-    "valorUnitario": 18.78409090909091
+    "estoqueAtual": 0
   },
   {
     "codigo": 187,
@@ -2012,8 +1845,7 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 500,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 234,
@@ -2024,8 +1856,7 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 500,
-    "estoqueAtual": 105,
-    "valorUnitario": 46.27450980392157
+    "estoqueAtual": 105
   },
   {
     "codigo": 156,
@@ -2036,8 +1867,7 @@
     "unidade": "CONJ",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 5,
-    "valorUnitario": 375.9
+    "estoqueAtual": 5
   },
   {
     "codigo": 157,
@@ -2048,8 +1878,7 @@
     "unidade": "CONJ",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 5,
-    "valorUnitario": 375.9
+    "estoqueAtual": 5
   },
   {
     "codigo": 155,
@@ -2060,8 +1889,7 @@
     "unidade": "CONJ",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 5,
-    "valorUnitario": 375.9
+    "estoqueAtual": 5
   },
   {
     "codigo": 229,
@@ -2072,8 +1900,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 230,
@@ -2084,8 +1911,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 258,
@@ -2096,8 +1922,7 @@
     "unidade": "M",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 2800,
-    "valorUnitario": 0.0
+    "estoqueAtual": 2800
   },
   {
     "codigo": 260,
@@ -2108,8 +1933,7 @@
     "unidade": "M",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 300,
-    "valorUnitario": 0.0
+    "estoqueAtual": 300
   },
   {
     "codigo": 147,
@@ -2120,8 +1944,7 @@
     "unidade": "MTS",
     "estoqueMin": 100,
     "estoqueMax": 300,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 259,
@@ -2132,8 +1955,7 @@
     "unidade": "M",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 660,
-    "valorUnitario": 0.0
+    "estoqueAtual": 660
   },
   {
     "codigo": 99,
@@ -2144,8 +1966,7 @@
     "unidade": "MTS",
     "estoqueMin": 100,
     "estoqueMax": 300,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 100,
@@ -2156,8 +1977,7 @@
     "unidade": "UND",
     "estoqueMin": 30,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 206,
@@ -2168,8 +1988,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 205,
@@ -2180,8 +1999,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 108,
@@ -2192,8 +2010,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 80,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 196,
@@ -2204,8 +2021,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 1,
-    "valorUnitario": 0.0
+    "estoqueAtual": 1
   },
   {
     "codigo": 101,
@@ -2216,8 +2032,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 27,
-    "valorUnitario": 65.48275862068965
+    "estoqueAtual": 27
   },
   {
     "codigo": 102,
@@ -2228,8 +2043,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 15,
-    "valorUnitario": 45.576
+    "estoqueAtual": 15
   },
   {
     "codigo": 103,
@@ -2240,8 +2054,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 5,
-    "valorUnitario": 189.9
+    "estoqueAtual": 5
   },
   {
     "codigo": 104,
@@ -2252,8 +2065,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 11,
-    "valorUnitario": 86.31818181818181
+    "estoqueAtual": 11
   },
   {
     "codigo": 105,
@@ -2264,8 +2076,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 8,
-    "valorUnitario": 109.5576923076923
+    "estoqueAtual": 8
   },
   {
     "codigo": 106,
@@ -2276,8 +2087,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 26,
-    "valorUnitario": 17.263636363636365
+    "estoqueAtual": 26
   },
   {
     "codigo": 107,
@@ -2288,8 +2098,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 10,
-    "valorUnitario": 67.82142857142857
+    "estoqueAtual": 10
   },
   {
     "codigo": 161,
@@ -2300,8 +2109,7 @@
     "unidade": "UND",
     "estoqueMin": 200,
     "estoqueMax": 500,
-    "estoqueAtual": 176,
-    "valorUnitario": 0.7728337236533958
+    "estoqueAtual": 176
   },
   {
     "codigo": 226,
@@ -2312,8 +2120,7 @@
     "unidade": "UND",
     "estoqueMin": 5,
     "estoqueMax": 25,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 208,
@@ -2324,8 +2131,7 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 500,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 146,
@@ -2336,8 +2142,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 227,
@@ -2348,8 +2153,7 @@
     "unidade": "UND",
     "estoqueMin": 2,
     "estoqueMax": 10,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 148,
@@ -2360,8 +2164,7 @@
     "unidade": "PAR",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 110,
@@ -2372,8 +2175,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 500,
-    "estoqueAtual": 190,
-    "valorUnitario": 2.395696721311475
+    "estoqueAtual": 190
   },
   {
     "codigo": 112,
@@ -2384,8 +2186,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 200,
-    "estoqueAtual": 2,
-    "valorUnitario": 0.0
+    "estoqueAtual": 2
   },
   {
     "codigo": 262,
@@ -2396,8 +2197,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 200,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 149,
@@ -2408,8 +2208,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 10,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 141,
@@ -2420,8 +2219,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 250,
-    "estoqueAtual": 165,
-    "valorUnitario": 0.7268722466960352
+    "estoqueAtual": 165
   },
   {
     "codigo": 111,
@@ -2432,8 +2230,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 250,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 189,
@@ -2444,8 +2241,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 500,
-    "estoqueAtual": 0,
-    "valorUnitario": 8.658798283261802
+    "estoqueAtual": 0
   },
   {
     "codigo": 261,
@@ -2456,8 +2252,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 5,
-    "valorUnitario": 0.0
+    "estoqueAtual": 5
   },
   {
     "codigo": 263,
@@ -2468,8 +2263,7 @@
     "unidade": "UND",
     "estoqueMin": 360,
     "estoqueMax": 360,
-    "estoqueAtual": 19,
-    "valorUnitario": 0.0
+    "estoqueAtual": 19
   },
   {
     "codigo": 114,
@@ -2480,8 +2274,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 1000,
-    "estoqueAtual": 639,
-    "valorUnitario": 1.0548810467882634
+    "estoqueAtual": 639
   },
   {
     "codigo": 257,
@@ -2492,8 +2285,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 30,
-    "valorUnitario": 0.0
+    "estoqueAtual": 30
   },
   {
     "codigo": 150,
@@ -2504,8 +2296,7 @@
     "unidade": "PAR",
     "estoqueMin": 2,
     "estoqueMax": 5,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 209,
@@ -2516,8 +2307,7 @@
     "unidade": "PAR",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 115,
@@ -2528,8 +2318,7 @@
     "unidade": "PAR",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 3,
-    "valorUnitario": 63.86
+    "estoqueAtual": 3
   },
   {
     "codigo": 117,
@@ -2540,8 +2329,7 @@
     "unidade": "PAR",
     "estoqueMin": 200,
     "estoqueMax": 500,
-    "estoqueAtual": 402,
-    "valorUnitario": 0.0
+    "estoqueAtual": 402
   },
   {
     "codigo": 207,
@@ -2552,8 +2340,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 500,
-    "estoqueAtual": 290,
-    "valorUnitario": 0.5704974271012007
+    "estoqueAtual": 290
   },
   {
     "codigo": 267,
@@ -2564,8 +2351,7 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 250,
-    "estoqueAtual": 563,
-    "valorUnitario": 0.0
+    "estoqueAtual": 563
   },
   {
     "codigo": 116,
@@ -2576,8 +2362,7 @@
     "unidade": "PAR",
     "estoqueMin": 200,
     "estoqueMax": 500,
-    "estoqueAtual": 34,
-    "valorUnitario": 8.673913043478262
+    "estoqueAtual": 34
   },
   {
     "codigo": 192,
@@ -2588,8 +2373,7 @@
     "unidade": "UND",
     "estoqueMin": 150,
     "estoqueMax": 300,
-    "estoqueAtual": 3,
-    "valorUnitario": 11.956521739130435
+    "estoqueAtual": 3
   },
   {
     "codigo": 160,
@@ -2600,8 +2384,7 @@
     "unidade": "PAR",
     "estoqueMin": 150,
     "estoqueMax": 300,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 159,
@@ -2612,8 +2395,7 @@
     "unidade": "PAR",
     "estoqueMin": 150,
     "estoqueMax": 300,
-    "estoqueAtual": 108,
-    "valorUnitario": 25.79801324503311
+    "estoqueAtual": 108
   },
   {
     "codigo": 118,
@@ -2624,8 +2406,7 @@
     "unidade": "UND",
     "estoqueMin": 300,
     "estoqueMax": 500,
-    "estoqueAtual": 10,
-    "valorUnitario": 0.21177989130434782
+    "estoqueAtual": 10
   },
   {
     "codigo": 120,
@@ -2636,8 +2417,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 131,
@@ -2648,8 +2428,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 91.8
+    "estoqueAtual": 0
   },
   {
     "codigo": 121,
@@ -2660,8 +2439,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 5,
-    "valorUnitario": 26.790000000000003
+    "estoqueAtual": 5
   },
   {
     "codigo": 125,
@@ -2672,8 +2450,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 54.53818181818182
+    "estoqueAtual": 0
   },
   {
     "codigo": 144,
@@ -2684,8 +2461,7 @@
     "unidade": "UND",
     "estoqueMin": 500,
     "estoqueMax": 1000,
-    "estoqueAtual": 932,
-    "valorUnitario": 0.12383329715650097
+    "estoqueAtual": 932
   },
   {
     "codigo": 126,
@@ -2696,8 +2472,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 1000,
-    "estoqueAtual": 74,
-    "valorUnitario": 0.563784887678693
+    "estoqueAtual": 74
   },
   {
     "codigo": 124,
@@ -2708,8 +2483,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 1000,
-    "estoqueAtual": 720,
-    "valorUnitario": 0.3326470588235294
+    "estoqueAtual": 720
   },
   {
     "codigo": 123,
@@ -2720,8 +2494,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 80,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 224,
@@ -2732,8 +2505,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 500,
-    "estoqueAtual": 59,
-    "valorUnitario": 0.06944444444444445
+    "estoqueAtual": 59
   },
   {
     "codigo": 225,
@@ -2744,8 +2516,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 500,
-    "estoqueAtual": 114,
-    "valorUnitario": 1.0670731707317074
+    "estoqueAtual": 114
   },
   {
     "codigo": 127,
@@ -2756,8 +2527,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 70,
-    "estoqueAtual": 4,
-    "valorUnitario": 69.5
+    "estoqueAtual": 4
   },
   {
     "codigo": 129,
@@ -2768,8 +2538,7 @@
     "unidade": "PAR",
     "estoqueMin": 200,
     "estoqueMax": 300,
-    "estoqueAtual": 52,
-    "valorUnitario": 2.9157894736842103
+    "estoqueAtual": 52
   },
   {
     "codigo": 128,
@@ -2780,8 +2549,7 @@
     "unidade": "PAR",
     "estoqueMin": 200,
     "estoqueMax": 300,
-    "estoqueAtual": 20,
-    "valorUnitario": 18.445
+    "estoqueAtual": 20
   },
   {
     "codigo": 191,
@@ -2792,8 +2560,7 @@
     "unidade": "UND",
     "estoqueMin": 80,
     "estoqueMax": 250,
-    "estoqueAtual": 17,
-    "valorUnitario": 0.0
+    "estoqueAtual": 17
   },
   {
     "codigo": 130,
@@ -2804,8 +2571,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 250,
-    "estoqueAtual": 30,
-    "valorUnitario": 3.111111111111111
+    "estoqueAtual": 30
   },
   {
     "codigo": 139,
@@ -2816,8 +2582,7 @@
     "unidade": "UND",
     "estoqueMin": 500,
     "estoqueMax": 1000,
-    "estoqueAtual": 808,
-    "valorUnitario": 0.38981042654028436
+    "estoqueAtual": 808
   },
   {
     "codigo": 231,
@@ -2828,8 +2593,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 5000,
-    "estoqueAtual": 1400,
-    "valorUnitario": 0.5025000000000001
+    "estoqueAtual": 1400
   },
   {
     "codigo": 132,
@@ -2840,8 +2604,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 193,
@@ -2852,8 +2615,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 134,
@@ -2864,8 +2626,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 1,
-    "valorUnitario": 106.78571428571429
+    "estoqueAtual": 1
   },
   {
     "codigo": 211,
@@ -2876,8 +2637,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 200,
-    "estoqueAtual": 56,
-    "valorUnitario": 12.901304347826088
+    "estoqueAtual": 56
   },
   {
     "codigo": 119,
@@ -2888,8 +2648,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 11,
-    "valorUnitario": 0.0
+    "estoqueAtual": 11
   },
   {
     "codigo": 122,
@@ -2900,8 +2659,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 11,
-    "valorUnitario": 10.653823529411765
+    "estoqueAtual": 11
   },
   {
     "codigo": 265,
@@ -2912,8 +2670,7 @@
     "unidade": "UND",
     "estoqueMin": 0,
     "estoqueMax": 0,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 232,
@@ -2924,8 +2681,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 50,
-    "estoqueAtual": 28,
-    "valorUnitario": 44.66216216216216
+    "estoqueAtual": 28
   },
   {
     "codigo": 135,
@@ -2936,8 +2692,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 18,
-    "valorUnitario": 17.71991525423729
+    "estoqueAtual": 18
   },
   {
     "codigo": 236,
@@ -2948,8 +2703,7 @@
     "unidade": "UND",
     "estoqueMin": 0,
     "estoqueMax": 0,
-    "estoqueAtual": 13,
-    "valorUnitario": 0.0
+    "estoqueAtual": 13
   },
   {
     "codigo": 136,
@@ -2960,8 +2714,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 12,
-    "valorUnitario": 47.4375
+    "estoqueAtual": 12
   },
   {
     "codigo": 137,
@@ -2972,8 +2725,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 37,
-    "valorUnitario": 3.2061068702290076
+    "estoqueAtual": 37
   },
   {
     "codigo": 143,
@@ -2984,8 +2736,7 @@
     "unidade": "UND",
     "estoqueMin": 15,
     "estoqueMax": 25,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 142,
@@ -2996,8 +2747,7 @@
     "unidade": "UND",
     "estoqueMin": 15,
     "estoqueMax": 25,
-    "estoqueAtual": 11,
-    "valorUnitario": 141.03529411764708
+    "estoqueAtual": 11
   },
   {
     "codigo": 138,
@@ -3008,8 +2758,7 @@
     "unidade": "UND",
     "estoqueMin": 15,
     "estoqueMax": 25,
-    "estoqueAtual": 0,
-    "valorUnitario": 0.0
+    "estoqueAtual": 0
   },
   {
     "codigo": 194,
@@ -3020,7 +2769,6 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 250,
-    "estoqueAtual": 10,
-    "valorUnitario": 2.5185185185185186
+    "estoqueAtual": 10
   }
 ]

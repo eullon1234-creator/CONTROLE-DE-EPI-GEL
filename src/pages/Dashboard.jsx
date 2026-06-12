@@ -17,7 +17,7 @@ function StatCard({ icon, label, value, color }) {
 }
 
 export default function Dashboard() {
-  const [stats, setStats] = useState({ total: 0, baixoEstoque: 0, entradasHoje: 0, saidasHoje: 0, valorTotalEstoque: 0 });
+  const [stats, setStats] = useState({ total: 0, baixoEstoque: 0, entradasHoje: 0, saidasHoje: 0 });
   const [alertas, setAlertas] = useState([]);
   const [recentes, setRecentes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,7 +29,6 @@ export default function Dashboard() {
         const prodSnap = await getDocs(collection(db, 'produtos'));
         const produtos = prodSnap.docs.map(d => ({ id: d.id, ...d.data() }));
         const baixoEstoque = produtos.filter(p => p.estoqueAtual <= p.estoqueMin);
-        const valorTotalEstoque = produtos.reduce((acc, p) => acc + ((p.estoqueAtual ?? 0) * (p.valorUnitario ?? 0)), 0);
 
         // Movimentações de hoje
         const hoje = new Date();
@@ -54,7 +53,7 @@ export default function Dashboard() {
         );
         setRecentes(recentSnap.docs.slice(0, 8).map(d => ({ id: d.id, ...d.data() })));
 
-        setStats({ total: produtos.length, baixoEstoque: baixoEstoque.length, entradasHoje, saidasHoje, valorTotalEstoque });
+        setStats({ total: produtos.length, baixoEstoque: baixoEstoque.length, entradasHoje, saidasHoje });
         setAlertas(baixoEstoque.slice(0, 5));
       } catch (e) {
         console.error(e);
@@ -67,10 +66,50 @@ export default function Dashboard() {
 
   const today = format(new Date(), "EEEE, d 'de' MMMM 'de' yyyy", { locale: ptBR });
 
-  if (loading) return <div className="loading-center"><div className="loading-spin" /></div>;
+  if (loading) {
+    return (
+      <div className="page-enter">
+        <div className="page-header">
+          <div>
+            <div className="skeleton" style={{ width: '150px', height: '2rem', marginBottom: '0.5rem', borderRadius: '4px' }}></div>
+            <div className="skeleton" style={{ width: '220px', height: '1rem', borderRadius: '4px' }}></div>
+          </div>
+        </div>
+
+        <div className="stats-grid">
+          {[1, 2, 3, 4].map(n => (
+            <div key={n} className="card stat-card skeleton-card">
+              <div className="skeleton skeleton-icon" style={{ width: '42px', height: '42px', borderRadius: '10px', flexShrink: 0 }}></div>
+              <div style={{ flex: 1 }}>
+                <div className="skeleton" style={{ width: '60px', height: '1.75rem', marginBottom: '0.5rem', borderRadius: '4px' }}></div>
+                <div className="skeleton" style={{ width: '100px', height: '0.875rem', borderRadius: '4px' }}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="section">
+          <div className="section-header">
+            <div className="skeleton" style={{ width: '200px', height: '1.25rem', borderRadius: '4px' }}></div>
+          </div>
+          <div className="card" style={{ padding: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+              {[1, 2, 3, 4, 5].map(n => (
+                <div key={n} style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                  <div className="skeleton" style={{ width: '80px', height: '1.5rem', borderRadius: '6px' }}></div>
+                  <div className="skeleton" style={{ flex: 1, height: '1.25rem', borderRadius: '4px' }}></div>
+                  <div className="skeleton" style={{ width: '60px', height: '1.25rem', borderRadius: '4px' }}></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div>
+    <div className="page-enter">
       <div className="page-header">
         <div>
           <h1 className="page-title">Dashboard</h1>
@@ -80,7 +119,6 @@ export default function Dashboard() {
 
       <div className="stats-grid">
         <StatCard icon="📦" label="Produtos Cadastrados" value={stats.total} color="blue" />
-        <StatCard icon="💰" label="Custo do Estoque" value={stats.valorTotalEstoque.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} color="green" />
         <StatCard icon="🔴" label="Estoque Baixo" value={stats.baixoEstoque} color="red" />
         <StatCard icon="📥" label="Unidades Entrada Hoje" value={stats.entradasHoje} color="green" />
         <StatCard icon="📤" label="Unidades Saída Hoje" value={stats.saidasHoje} color="yellow" />

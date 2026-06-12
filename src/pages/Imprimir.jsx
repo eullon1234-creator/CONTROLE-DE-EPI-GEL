@@ -236,7 +236,7 @@ export default function Imprimir() {
           * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
 
           .no-print { display:none !important; }
-          .navbar   { display:none !important; }
+          .navbar, .mobile-bottom-nav, .mobile-drawer-overlay { display:none !important; }
           .app-layout { display:block !important; }
           .app-main { margin:0 !important; padding:0 !important; }
 
