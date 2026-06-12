@@ -3,6 +3,9 @@ import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
 import { filterProdutos } from '../utils/search';
+import { format } from 'date-fns';
+import toast from 'react-hot-toast';
+import * as XLSX from 'xlsx';
 
 function getStatusBadge(produto) {
   const { estoqueAtual, estoqueMin, estoqueMax } = produto;
@@ -14,6 +17,7 @@ function getStatusBadge(produto) {
 export default function Estoque() {
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [exporting, setExporting] = useState(false);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('todos');
   const navigate = useNavigate();
@@ -29,6 +33,96 @@ export default function Estoque() {
     }
     load();
   }, []);
+
+  const handleExportExcel = async () => {
+    setExporting(true);
+    try {
+      // 1. Fetch movements on demand
+      const movsSnap = await getDocs(
+        query(collection(db, 'movimentacoes'), orderBy('criadoEm', 'desc'))
+      );
+      const allMovs = movsSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+      // 2. Filter inputs and outputs
+      const entradas = allMovs.filter(m => m.tipo === 'ENTRADA');
+      const saidas = allMovs.filter(m => m.tipo === 'SAIDA');
+
+      // 3. Format Estoque data
+      const estoqueData = produtos.map(p => {
+        let status = 'Normal';
+        if (p.estoqueAtual <= p.estoqueMin) status = 'Estoque Baixo';
+        else if (p.estoqueAtual >= p.estoqueMax) status = 'Estoque Alto';
+
+        return {
+          'Código': p.codigo || '',
+          'Descrição': p.descricao || '',
+          'Grupo': p.grupo || '',
+          'Unidade': p.unidade || '',
+          'CA': p.ca || '',
+          'Validade CA': p.validadeCa || '',
+          'Localização': p.localizacao || '',
+          'Estoque Mínimo': p.estoqueMin ?? 0,
+          'Estoque Máximo': p.estoqueMax ?? 0,
+          'Estoque Atual': p.estoqueAtual ?? 0,
+          'Status': status
+        };
+      });
+
+      // 4. Format Entradas data
+      const entradasData = entradas.map(m => {
+        const dataFormatada = m.data || (m.criadoEm?.toDate ? format(m.criadoEm.toDate(), 'yyyy-MM-dd') : '—');
+        return {
+          'Data': dataFormatada,
+          'Código do Produto': m.produtoCodigo || '',
+          'Descrição do Produto': m.produtoDescricao || '',
+          'Quantidade': m.quantidade ?? 0,
+          'Unidade': m.unidade || '',
+          'Fornecedor': m.fornecedor || '—',
+          'Nº NF': m.nfNumero || '—',
+          'Observação': m.observacao || '—',
+          'Registrado por': m.registradoPorEmail || '—'
+        };
+      });
+
+      // 5. Format Saídas data
+      const saidasData = saidas.map(m => {
+        const dataFormatada = m.data || (m.criadoEm?.toDate ? format(m.criadoEm.toDate(), 'yyyy-MM-dd') : '—');
+        return {
+          'Data': dataFormatada,
+          'Código do Produto': m.produtoCodigo || '',
+          'Descrição do Produto': m.produtoDescricao || '',
+          'Quantidade': m.quantidade ?? 0,
+          'Unidade': m.unidade || '',
+          'Funcionário': m.funcionario || '—',
+          'Empresa': m.empresa || '—',
+          'Observação': m.observacao || '—',
+          'Registrado por': m.registradoPorEmail || '—'
+        };
+      });
+
+      // 6. Create Workbook
+      const wb = XLSX.utils.book_new();
+
+      // Convert arrays of objects to sheets
+      const wsEstoque = XLSX.utils.json_to_sheet(estoqueData);
+      const wsEntradas = XLSX.utils.json_to_sheet(entradasData);
+      const wsSaidas = XLSX.utils.json_to_sheet(saidasData);
+
+      // Append sheets to workbook
+      XLSX.utils.book_append_sheet(wb, wsEstoque, 'Estoque Atual');
+      XLSX.utils.book_append_sheet(wb, wsEntradas, 'Entradas');
+      XLSX.utils.book_append_sheet(wb, wsSaidas, 'Saídas');
+
+      // Write and download
+      XLSX.writeFile(wb, `Relatorio_Controle_EPI_${format(new Date(), 'yyyyMMdd_HHmmss')}.xlsx`);
+      toast.success('Planilha exportada com sucesso!');
+    } catch (error) {
+      console.error('Erro ao exportar Excel:', error);
+      toast.error('Erro ao exportar planilha. Tente novamente.');
+    } finally {
+      setExporting(false);
+    }
+  };
 
   const searchFiltered = filterProdutos(produtos, search);
   const filtered = searchFiltered.filter(p => {
@@ -48,9 +142,26 @@ export default function Estoque() {
           <h1 className="page-title">📦 Estoque</h1>
           <p className="page-subtitle">{produtos.length} produtos cadastrados · {filtered.length} exibidos</p>
         </div>
-        <button className="btn btn-primary" onClick={() => navigate('/produtos')} id="btn-novo-produto">
-          + Novo Produto
-        </button>
+        <div style={{ display: 'flex', gap: '0.75rem' }}>
+          <button
+            className="btn btn-success"
+            onClick={handleExportExcel}
+            disabled={exporting}
+            id="btn-exportar-excel"
+          >
+            {exporting ? (
+              <>
+                <div className="loading-spin" style={{ width: 14, height: 14, borderWidth: 1.5 }} />
+                Gerando Excel...
+              </>
+            ) : (
+              <>🟢 Exportar Planilha</>
+            )}
+          </button>
+          <button className="btn btn-primary" onClick={() => navigate('/produtos')} id="btn-novo-produto">
+            + Novo Produto
+          </button>
+        </div>
       </div>
 
       <div className="filters-bar">
