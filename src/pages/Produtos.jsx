@@ -186,6 +186,7 @@ export default function Produtos() {
     String(p.codigo).includes(search)
   );
 
+  console.log('DEBUG - selectedIds:', selectedIds);
   if (loading) return <div className="loading-center"><div className="loading-spin" /></div>;
 
   return (
