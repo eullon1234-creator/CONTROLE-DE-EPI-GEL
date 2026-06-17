@@ -95,7 +95,7 @@ export default function Saida() {
   }
 
   return (
-    <div>
+    <div className="page-enter">
       <div className="page-header">
         <div>
           <h1 className="page-title">📤 Registrar Saída</h1>

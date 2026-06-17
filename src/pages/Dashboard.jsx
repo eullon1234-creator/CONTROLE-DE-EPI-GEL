@@ -66,10 +66,50 @@ export default function Dashboard() {
 
   const today = format(new Date(), "EEEE, d 'de' MMMM 'de' yyyy", { locale: ptBR });
 
-  if (loading) return <div className="loading-center"><div className="loading-spin" /></div>;
+  if (loading) {
+    return (
+      <div className="page-enter">
+        <div className="page-header">
+          <div>
+            <div className="skeleton" style={{ width: '150px', height: '2rem', marginBottom: '0.5rem', borderRadius: '4px' }}></div>
+            <div className="skeleton" style={{ width: '220px', height: '1rem', borderRadius: '4px' }}></div>
+          </div>
+        </div>
+
+        <div className="stats-grid">
+          {[1, 2, 3, 4].map(n => (
+            <div key={n} className="card stat-card skeleton-card">
+              <div className="skeleton skeleton-icon" style={{ width: '42px', height: '42px', borderRadius: '10px', flexShrink: 0 }}></div>
+              <div style={{ flex: 1 }}>
+                <div className="skeleton" style={{ width: '60px', height: '1.75rem', marginBottom: '0.5rem', borderRadius: '4px' }}></div>
+                <div className="skeleton" style={{ width: '100px', height: '0.875rem', borderRadius: '4px' }}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="section">
+          <div className="section-header">
+            <div className="skeleton" style={{ width: '200px', height: '1.25rem', borderRadius: '4px' }}></div>
+          </div>
+          <div className="card" style={{ padding: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+              {[1, 2, 3, 4, 5].map(n => (
+                <div key={n} style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                  <div className="skeleton" style={{ width: '80px', height: '1.5rem', borderRadius: '6px' }}></div>
+                  <div className="skeleton" style={{ flex: 1, height: '1.25rem', borderRadius: '4px' }}></div>
+                  <div className="skeleton" style={{ width: '60px', height: '1.25rem', borderRadius: '4px' }}></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div>
+    <div className="page-enter">
       <div className="page-header">
         <div>
           <h1 className="page-title">Dashboard</h1>

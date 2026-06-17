@@ -4,11 +4,11 @@
     "grupo": "CONSUMO",
     "descricao": "ABAFADOR DE RUIDOS TIPO CONCHA",
     "ca": "10468",
-    "validadeCa": "09/08/2027",
+    "validadeCa": "2027-08-09",
     "unidade": "UND",
     "estoqueMin": 80,
     "estoqueMax": 300,
-    "estoqueAtual": 0
+    "estoqueAtual": 25
   },
   {
     "codigo": 158,
@@ -30,7 +30,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 144
   },
   {
     "codigo": 2,
@@ -41,7 +41,7 @@
     "unidade": "UND",
     "estoqueMin": 60,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 16
   },
   {
     "codigo": 3,
@@ -63,7 +63,7 @@
     "unidade": "UND",
     "estoqueMin": 1,
     "estoqueMax": 1000,
-    "estoqueAtual": 0
+    "estoqueAtual": 146
   },
   {
     "codigo": 4,
@@ -85,7 +85,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 20,
-    "estoqueAtual": 0
+    "estoqueAtual": 17
   },
   {
     "codigo": 171,
@@ -96,7 +96,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 20,
-    "estoqueAtual": 0
+    "estoqueAtual": 15
   },
   {
     "codigo": 172,
@@ -107,7 +107,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 20,
-    "estoqueAtual": 0
+    "estoqueAtual": 1
   },
   {
     "codigo": 173,
@@ -129,7 +129,7 @@
     "unidade": "PAR",
     "estoqueMin": 5,
     "estoqueMax": 20,
-    "estoqueAtual": 0
+    "estoqueAtual": 9
   },
   {
     "codigo": 5,
@@ -151,7 +151,7 @@
     "unidade": "PAR",
     "estoqueMin": 30,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 4
   },
   {
     "codigo": 7,
@@ -228,7 +228,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 6
   },
   {
     "codigo": 14,
@@ -239,7 +239,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 10
   },
   {
     "codigo": 165,
@@ -349,7 +349,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 0
+    "estoqueAtual": 15
   },
   {
     "codigo": 21,
@@ -360,7 +360,7 @@
     "unidade": "PAR",
     "estoqueMin": 20,
     "estoqueMax": 20,
-    "estoqueAtual": 0
+    "estoqueAtual": 15
   },
   {
     "codigo": 22,
@@ -591,7 +591,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 13
   },
   {
     "codigo": 36,
@@ -602,7 +602,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0
+    "estoqueAtual": 11
   },
   {
     "codigo": 37,
@@ -613,7 +613,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0
+    "estoqueAtual": 9
   },
   {
     "codigo": 38,
@@ -646,7 +646,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0
+    "estoqueAtual": 28
   },
   {
     "codigo": 41,
@@ -657,7 +657,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0
+    "estoqueAtual": 3
   },
   {
     "codigo": 42,
@@ -668,7 +668,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0
+    "estoqueAtual": 9
   },
   {
     "codigo": 43,
@@ -679,7 +679,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 5
   },
   {
     "codigo": 44,
@@ -690,7 +690,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 4
   },
   {
     "codigo": 249,
@@ -899,7 +899,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0
+    "estoqueAtual": 52
   },
   {
     "codigo": 217,
@@ -910,7 +910,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0
+    "estoqueAtual": 22
   },
   {
     "codigo": 218,
@@ -921,7 +921,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0
+    "estoqueAtual": 1
   },
   {
     "codigo": 219,
@@ -965,7 +965,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 150,
-    "estoqueAtual": 0
+    "estoqueAtual": 10
   },
   {
     "codigo": 223,
@@ -1009,7 +1009,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 104
   },
   {
     "codigo": 47,
@@ -1020,7 +1020,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 141
   },
   {
     "codigo": 48,
@@ -1031,7 +1031,7 @@
     "unidade": "UND",
     "estoqueMin": 200,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 19
   },
   {
     "codigo": 49,
@@ -1042,7 +1042,7 @@
     "unidade": "UND",
     "estoqueMin": 150,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 46
   },
   {
     "codigo": 50,
@@ -1053,7 +1053,7 @@
     "unidade": "UND",
     "estoqueMin": 150,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 165
   },
   {
     "codigo": 51,
@@ -1075,7 +1075,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 13
   },
   {
     "codigo": 52,
@@ -1086,7 +1086,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 10
   },
   {
     "codigo": 202,
@@ -1097,7 +1097,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 8
   },
   {
     "codigo": 53,
@@ -1108,7 +1108,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 11
   },
   {
     "codigo": 55,
@@ -1119,7 +1119,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 0
+    "estoqueAtual": 17
   },
   {
     "codigo": 56,
@@ -1240,7 +1240,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 8
   },
   {
     "codigo": 64,
@@ -1251,7 +1251,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 10
   },
   {
     "codigo": 184,
@@ -1262,7 +1262,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 7
   },
   {
     "codigo": 65,
@@ -1273,7 +1273,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 9
   },
   {
     "codigo": 66,
@@ -1284,7 +1284,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 8
   },
   {
     "codigo": 199,
@@ -1295,7 +1295,7 @@
     "unidade": "UND",
     "estoqueMin": 30,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 5
   },
   {
     "codigo": 67,
@@ -1306,7 +1306,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 84
   },
   {
     "codigo": 68,
@@ -1317,7 +1317,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 258
   },
   {
     "codigo": 69,
@@ -1328,7 +1328,7 @@
     "unidade": "UND",
     "estoqueMin": 200,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 49
   },
   {
     "codigo": 70,
@@ -1339,7 +1339,7 @@
     "unidade": "UND",
     "estoqueMin": 150,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 245
   },
   {
     "codigo": 71,
@@ -1350,7 +1350,7 @@
     "unidade": "UND",
     "estoqueMin": 150,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 63
   },
   {
     "codigo": 200,
@@ -1361,7 +1361,7 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 200,
-    "estoqueAtual": 0
+    "estoqueAtual": 15
   },
   {
     "codigo": 72,
@@ -1383,7 +1383,7 @@
     "unidade": "UND",
     "estoqueMin": 200,
     "estoqueMax": 400,
-    "estoqueAtual": 0
+    "estoqueAtual": 175
   },
   {
     "codigo": 74,
@@ -1394,7 +1394,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 22
   },
   {
     "codigo": 75,
@@ -1405,7 +1405,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 5
   },
   {
     "codigo": 76,
@@ -1416,7 +1416,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 3
   },
   {
     "codigo": 77,
@@ -1427,7 +1427,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 7
   },
   {
     "codigo": 78,
@@ -1449,7 +1449,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 18
   },
   {
     "codigo": 176,
@@ -1482,7 +1482,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 7
   },
   {
     "codigo": 183,
@@ -1526,7 +1526,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 20
   },
   {
     "codigo": 178,
@@ -1537,7 +1537,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 25
   },
   {
     "codigo": 79,
@@ -1548,7 +1548,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 17
   },
   {
     "codigo": 80,
@@ -1570,7 +1570,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 4
   },
   {
     "codigo": 82,
@@ -1581,7 +1581,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 8
   },
   {
     "codigo": 83,
@@ -1592,7 +1592,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 15
   },
   {
     "codigo": 84,
@@ -1603,7 +1603,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 8
   },
   {
     "codigo": 85,
@@ -1625,7 +1625,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 20
   },
   {
     "codigo": 140,
@@ -1636,7 +1636,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 3
   },
   {
     "codigo": 87,
@@ -1647,7 +1647,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 4
   },
   {
     "codigo": 88,
@@ -1658,7 +1658,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 4
   },
   {
     "codigo": 89,
@@ -1669,7 +1669,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 3
   },
   {
     "codigo": 90,
@@ -1691,7 +1691,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 3
   },
   {
     "codigo": 92,
@@ -1713,7 +1713,7 @@
     "unidade": "UND",
     "estoqueMin": 300,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 14
   },
   {
     "codigo": 94,
@@ -1724,7 +1724,7 @@
     "unidade": "UND",
     "estoqueMin": 30,
     "estoqueMax": 300,
-    "estoqueAtual": 0
+    "estoqueAtual": 78
   },
   {
     "codigo": 95,
@@ -1757,7 +1757,7 @@
     "unidade": "UND",
     "estoqueMin": 0,
     "estoqueMax": 0,
-    "estoqueAtual": 0
+    "estoqueAtual": 2
   },
   {
     "codigo": 96,
@@ -1779,7 +1779,7 @@
     "unidade": "UND",
     "estoqueMin": 0,
     "estoqueMax": 0,
-    "estoqueAtual": 0
+    "estoqueAtual": 3
   },
   {
     "codigo": 210,
@@ -1812,7 +1812,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 32
   },
   {
     "codigo": 188,
@@ -1856,7 +1856,7 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 105
   },
   {
     "codigo": 156,
@@ -1867,7 +1867,7 @@
     "unidade": "CONJ",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 0
+    "estoqueAtual": 5
   },
   {
     "codigo": 157,
@@ -1878,7 +1878,7 @@
     "unidade": "CONJ",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 0
+    "estoqueAtual": 5
   },
   {
     "codigo": 155,
@@ -1889,7 +1889,7 @@
     "unidade": "CONJ",
     "estoqueMin": 10,
     "estoqueMax": 20,
-    "estoqueAtual": 0
+    "estoqueAtual": 5
   },
   {
     "codigo": 229,
@@ -1922,7 +1922,7 @@
     "unidade": "M",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 2800
   },
   {
     "codigo": 260,
@@ -1933,7 +1933,7 @@
     "unidade": "M",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 300
   },
   {
     "codigo": 147,
@@ -1955,7 +1955,7 @@
     "unidade": "M",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 660
   },
   {
     "codigo": 99,
@@ -2021,7 +2021,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 1
   },
   {
     "codigo": 101,
@@ -2032,7 +2032,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 27
   },
   {
     "codigo": 102,
@@ -2043,7 +2043,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 15
   },
   {
     "codigo": 103,
@@ -2054,7 +2054,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 5
   },
   {
     "codigo": 104,
@@ -2065,7 +2065,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 11
   },
   {
     "codigo": 105,
@@ -2076,7 +2076,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 8
   },
   {
     "codigo": 106,
@@ -2087,7 +2087,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 26
   },
   {
     "codigo": 107,
@@ -2098,7 +2098,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 10
   },
   {
     "codigo": 161,
@@ -2109,7 +2109,7 @@
     "unidade": "UND",
     "estoqueMin": 200,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 176
   },
   {
     "codigo": 226,
@@ -2175,7 +2175,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 190
   },
   {
     "codigo": 112,
@@ -2186,7 +2186,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 200,
-    "estoqueAtual": 0
+    "estoqueAtual": 2
   },
   {
     "codigo": 262,
@@ -2219,7 +2219,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 165
   },
   {
     "codigo": 111,
@@ -2252,7 +2252,7 @@
     "unidade": "PAR",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 5
   },
   {
     "codigo": 263,
@@ -2263,7 +2263,7 @@
     "unidade": "UND",
     "estoqueMin": 360,
     "estoqueMax": 360,
-    "estoqueAtual": 0
+    "estoqueAtual": 19
   },
   {
     "codigo": 114,
@@ -2274,7 +2274,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 1000,
-    "estoqueAtual": 0
+    "estoqueAtual": 639
   },
   {
     "codigo": 257,
@@ -2285,7 +2285,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 30
   },
   {
     "codigo": 150,
@@ -2318,7 +2318,7 @@
     "unidade": "PAR",
     "estoqueMin": 25,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 3
   },
   {
     "codigo": 117,
@@ -2329,7 +2329,7 @@
     "unidade": "PAR",
     "estoqueMin": 200,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 402
   },
   {
     "codigo": 207,
@@ -2340,7 +2340,7 @@
     "unidade": "PAR",
     "estoqueMin": 100,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 290
   },
   {
     "codigo": 267,
@@ -2351,7 +2351,7 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 563
   },
   {
     "codigo": 116,
@@ -2362,7 +2362,7 @@
     "unidade": "PAR",
     "estoqueMin": 200,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 34
   },
   {
     "codigo": 192,
@@ -2373,7 +2373,7 @@
     "unidade": "UND",
     "estoqueMin": 150,
     "estoqueMax": 300,
-    "estoqueAtual": 0
+    "estoqueAtual": 3
   },
   {
     "codigo": 160,
@@ -2395,7 +2395,7 @@
     "unidade": "PAR",
     "estoqueMin": 150,
     "estoqueMax": 300,
-    "estoqueAtual": 0
+    "estoqueAtual": 108
   },
   {
     "codigo": 118,
@@ -2406,7 +2406,7 @@
     "unidade": "UND",
     "estoqueMin": 300,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 10
   },
   {
     "codigo": 120,
@@ -2439,7 +2439,7 @@
     "unidade": "UND",
     "estoqueMin": 20,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 5
   },
   {
     "codigo": 125,
@@ -2461,7 +2461,7 @@
     "unidade": "UND",
     "estoqueMin": 500,
     "estoqueMax": 1000,
-    "estoqueAtual": 0
+    "estoqueAtual": 932
   },
   {
     "codigo": 126,
@@ -2472,7 +2472,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 1000,
-    "estoqueAtual": 0
+    "estoqueAtual": 74
   },
   {
     "codigo": 124,
@@ -2483,7 +2483,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 1000,
-    "estoqueAtual": 0
+    "estoqueAtual": 720
   },
   {
     "codigo": 123,
@@ -2505,7 +2505,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 59
   },
   {
     "codigo": 225,
@@ -2516,7 +2516,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 114
   },
   {
     "codigo": 127,
@@ -2527,7 +2527,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 70,
-    "estoqueAtual": 0
+    "estoqueAtual": 4
   },
   {
     "codigo": 129,
@@ -2538,7 +2538,7 @@
     "unidade": "PAR",
     "estoqueMin": 200,
     "estoqueMax": 300,
-    "estoqueAtual": 0
+    "estoqueAtual": 52
   },
   {
     "codigo": 128,
@@ -2549,7 +2549,7 @@
     "unidade": "PAR",
     "estoqueMin": 200,
     "estoqueMax": 300,
-    "estoqueAtual": 0
+    "estoqueAtual": 20
   },
   {
     "codigo": 191,
@@ -2560,7 +2560,7 @@
     "unidade": "UND",
     "estoqueMin": 80,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 17
   },
   {
     "codigo": 130,
@@ -2571,7 +2571,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 30
   },
   {
     "codigo": 139,
@@ -2582,7 +2582,7 @@
     "unidade": "UND",
     "estoqueMin": 500,
     "estoqueMax": 1000,
-    "estoqueAtual": 0
+    "estoqueAtual": 808
   },
   {
     "codigo": 231,
@@ -2593,7 +2593,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 5000,
-    "estoqueAtual": 0
+    "estoqueAtual": 1400
   },
   {
     "codigo": 132,
@@ -2626,7 +2626,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 30,
-    "estoqueAtual": 0
+    "estoqueAtual": 1
   },
   {
     "codigo": 211,
@@ -2637,7 +2637,7 @@
     "unidade": "UND",
     "estoqueMin": 25,
     "estoqueMax": 200,
-    "estoqueAtual": 0
+    "estoqueAtual": 56
   },
   {
     "codigo": 119,
@@ -2648,7 +2648,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 11
   },
   {
     "codigo": 122,
@@ -2659,7 +2659,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 11
   },
   {
     "codigo": 265,
@@ -2681,7 +2681,7 @@
     "unidade": "UND",
     "estoqueMin": 10,
     "estoqueMax": 50,
-    "estoqueAtual": 0
+    "estoqueAtual": 28
   },
   {
     "codigo": 135,
@@ -2692,7 +2692,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 18
   },
   {
     "codigo": 236,
@@ -2703,7 +2703,7 @@
     "unidade": "UND",
     "estoqueMin": 0,
     "estoqueMax": 0,
-    "estoqueAtual": 0
+    "estoqueAtual": 13
   },
   {
     "codigo": 136,
@@ -2714,7 +2714,7 @@
     "unidade": "UND",
     "estoqueMin": 50,
     "estoqueMax": 100,
-    "estoqueAtual": 0
+    "estoqueAtual": 12
   },
   {
     "codigo": 137,
@@ -2725,7 +2725,7 @@
     "unidade": "UND",
     "estoqueMin": 250,
     "estoqueMax": 500,
-    "estoqueAtual": 0
+    "estoqueAtual": 37
   },
   {
     "codigo": 143,
@@ -2747,7 +2747,7 @@
     "unidade": "UND",
     "estoqueMin": 15,
     "estoqueMax": 25,
-    "estoqueAtual": 0
+    "estoqueAtual": 11
   },
   {
     "codigo": 138,
@@ -2769,6 +2769,6 @@
     "unidade": "UND",
     "estoqueMin": 100,
     "estoqueMax": 250,
-    "estoqueAtual": 0
+    "estoqueAtual": 10
   }
 ]

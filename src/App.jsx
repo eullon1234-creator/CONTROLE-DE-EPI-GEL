@@ -25,9 +25,10 @@ function AppLayout({ children }) {
 }
 
 function App() {
+  const basename = import.meta.env.DEV ? '/' : '/CONTROLE-DE-EPI-GEL';
   return (
     <AuthProvider>
-      <BrowserRouter basename="/CONTROLE-DE-EPI-GEL">
+      <BrowserRouter basename={basename}>
         <Toaster
           position="top-right"
           toastOptions={{
