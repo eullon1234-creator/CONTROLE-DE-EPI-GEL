@@ -182,7 +182,7 @@ export default function Historico() {
                     </span>
                   </td>
                   <td style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>
-                    {m.registradoPorEmail?.split('@')[0] || '—'}
+                    {m.registradoPorEmail?.split('@')[0]?.toUpperCase() || '—'}
                   </td>
                 </tr>
               ))}

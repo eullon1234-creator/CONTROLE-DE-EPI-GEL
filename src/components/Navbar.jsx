@@ -138,7 +138,7 @@ export default function Navbar() {
         <div className="user-card">
           <div className="user-avatar">{getInitials(user?.email)}</div>
           <div className="user-info">
-            <div className="user-name">{user?.email?.split('@')[0]}</div>
+            <div className="user-name">{user?.email?.split('@')[0]?.toUpperCase()}</div>
             <div className="user-role">Usuário</div>
           </div>
           <button
