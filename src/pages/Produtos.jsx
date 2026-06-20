@@ -326,7 +326,7 @@ export default function Produtos() {
                 <th>Validade CA</th>
                 <th>Unid.</th>
                 <th>Local.</th>
-                <th>Mín</th>
+                 <th>Mín</th>
                 <th>Máx</th>
                 <th>Atual</th>
                 <th>Ações</th>
@@ -353,7 +353,7 @@ export default function Produtos() {
                     <td style={{ color: 'var(--text-secondary)', fontSize: '0.8125rem', whiteSpace: 'nowrap' }}>{p.validadeCa || '—'}</td>
                     <td><span className="badge badge-blue">{p.unidade}</span></td>
                     <td>{p.localizacao ? <span className="badge badge-yellow">{p.localizacao}</span> : '—'}</td>
-                    <td>{p.estoqueMin}</td>
+                     <td>{p.estoqueMin}</td>
                     <td>{p.estoqueMax}</td>
                     <td style={{ fontWeight: 700, color: p.estoqueAtual <= p.estoqueMin ? 'var(--accent-red)' : 'var(--accent-green)' }}>
                       {p.estoqueAtual}

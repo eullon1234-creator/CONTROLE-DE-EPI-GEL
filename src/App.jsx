@@ -12,6 +12,7 @@ import Historico from './pages/Historico';
 import Produtos from './pages/Produtos';
 import Importar from './pages/Importar';
 import Imprimir from './pages/Imprimir';
+import Relatorios from './pages/Relatorios';
 
 function AppLayout({ children }) {
   return (
@@ -91,6 +92,12 @@ function App() {
           <Route path="/imprimir" element={
             <PrivateRoute>
               <AppLayout><Imprimir /></AppLayout>
+            </PrivateRoute>
+          } />
+
+          <Route path="/relatorios" element={
+            <PrivateRoute>
+              <AppLayout><Relatorios /></AppLayout>
             </PrivateRoute>
           } />
 
