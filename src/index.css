@@ -1417,9 +1417,23 @@ tbody td {
     grid-template-columns: 1fr 1fr !important;
   }
   
-  /* Touch target sizes */
+    /* Touch target sizes */
   .btn, .form-input, .form-select {
     padding: 0.6875rem 1rem;
   }
 }
+
+/* Botão premium para exportação formato tradicional (Estrela) */
+.btn-star {
+  background: var(--accent-yellow-dim);
+  color: var(--accent-yellow);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+.btn-star:hover {
+  background: var(--accent-yellow);
+  color: white;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+  transform: translateY(-1px);
+}
+
 
