@@ -101,9 +101,9 @@ export default function Login() {
       console.error(err);
       let msg = 'Erro ao realizar login. Verifique sua senha.';
       if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password') {
-        msg = 'Senha incorreta. Se esqueceu, clique em "Redefinir Senha com o Líder EULLON".';
+        msg = 'Senha incorreta. Se esqueceu sua senha, use a aba "🔑 Redefinir Senha".';
       } else if (err.code === 'auth/user-not-found') {
-        msg = 'Usuário sem senha cadastrada. Clique em "Criar Senha" abaixo.';
+        msg = 'Usuário sem senha cadastrada. Use a aba "✨ Criar Senha".';
       }
       setError(msg);
     } finally {
@@ -115,13 +115,13 @@ export default function Login() {
     setError('');
     setRequestingCode(true);
     try {
-      const code = await requestPasswordReset(selectedUser);
+      await requestPasswordReset(selectedUser);
       setCodeGenerated(true);
       setMode('reset');
       setPassword('');
       setConfirmPassword('');
       setResetCode('');
-      toast.success(`Código de redefinição enviado para o líder EULLON!`, { duration: 5000 });
+      toast.success(`Código gerado e enviado para o líder EULLON!`, { duration: 6000, icon: '🔔' });
     } catch (err) {
       console.error(err);
       setError('Erro ao solicitar código. Tente novamente.');
@@ -199,15 +199,15 @@ export default function Login() {
             </p>
           </div>
         ) : (
-          <form className="login-form" onSubmit={handleSubmit} id="login-form">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
-              <span style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', fontWeight: 500 }}>Identificação</span>
+          <div className="login-form-container">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', fontWeight: 500 }}>Usuário Selecionado</span>
               <button
                 type="button"
                 className="btn-back-user"
                 onClick={handleBackToUsers}
               >
-                ← Voltar
+                ← Trocar Usuário
               </button>
             </div>
 
@@ -221,196 +221,343 @@ export default function Login() {
                   {selectedUser.isLeader && <span style={{ marginLeft: 6, fontSize: '0.7rem', color: 'var(--accent-yellow)' }}>👑 Líder</span>}
                 </div>
                 <div className="selected-user-summary-label">
-                  {mode === 'register' && 'Cadastro de Novo Acesso'}
-                  {mode === 'login' && 'Entrada Autorizada'}
-                  {mode === 'reset' && 'Redefinição de Senha com Líder'}
+                  {selectedUser.email}
                 </div>
               </div>
             </div>
 
-            {/* Aviso especial no modo de redefinição de senha */}
-            {mode === 'reset' && (
-              <div style={{
-                background: 'rgba(59, 130, 246, 0.1)',
-                border: '1px solid rgba(59, 130, 246, 0.3)',
-                borderRadius: 'var(--radius-md)',
-                padding: '0.75rem 1rem',
-                marginTop: '0.75rem',
-                fontSize: '0.8125rem',
-                color: 'var(--text-primary)',
-                lineHeight: 1.4
-              }}>
-                <div style={{ fontWeight: 600, color: 'var(--accent-blue-light)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-                  <span>🛡️</span> Código Solicitado ao Líder EULLON
-                </div>
-                <div>
-                  Um código de <strong>6 dígitos</strong> chegou no painel do <strong>Líder EULLON</strong>. Peça o código a ele e digite abaixo junto com a sua nova senha:
-                </div>
-              </div>
-            )}
+            {/* ABAS DE NAVEGAÇÃO SUPER VISÍVEIS */}
+            <div style={{
+              display: 'flex',
+              background: 'rgba(255, 255, 255, 0.04)',
+              padding: '4px',
+              borderRadius: 'var(--radius-md)',
+              margin: '1rem 0',
+              gap: '4px',
+              border: '1px solid var(--border)'
+            }}>
+              <button
+                type="button"
+                onClick={() => { setMode('login'); setError(''); }}
+                style={{
+                  flex: 1,
+                  padding: '0.5rem 0.25rem',
+                  fontSize: '0.8125rem',
+                  fontWeight: mode === 'login' ? 700 : 500,
+                  background: mode === 'login' ? 'var(--accent-blue)' : 'transparent',
+                  color: mode === 'login' ? '#ffffff' : 'var(--text-secondary)',
+                  border: 'none',
+                  borderRadius: 'var(--radius-sm)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '4px'
+                }}
+              >
+                <span>🔐</span> Entrar
+              </button>
 
-            {/* Campo de Código de 6 Dígitos (somente no modo Reset) */}
-            {mode === 'reset' && (
-              <div className="form-group" style={{ marginTop: '0.75rem' }}>
-                <label className="form-label" htmlFor="reset-code">
-                  Código de 6 Dígitos (do Líder Eullon)
-                </label>
-                <input
-                  id="reset-code"
-                  type="text"
-                  maxLength={6}
-                  className="form-input"
-                  placeholder="Ex: 839201"
-                  value={resetCode}
-                  onChange={e => setResetCode(e.target.value.replace(/\D/g, ''))}
-                  style={{
-                    letterSpacing: '4px',
-                    fontSize: '1.25rem',
-                    textAlign: 'center',
-                    fontWeight: 700,
-                    color: 'var(--accent-yellow)'
-                  }}
-                  required
-                  autoFocus
-                />
-              </div>
-            )}
+              <button
+                type="button"
+                onClick={() => { setMode('reset'); setError(''); }}
+                style={{
+                  flex: 1.2,
+                  padding: '0.5rem 0.25rem',
+                  fontSize: '0.8125rem',
+                  fontWeight: mode === 'reset' ? 700 : 500,
+                  background: mode === 'reset' ? 'linear-gradient(135deg, #d97706, #f59e0b)' : 'transparent',
+                  color: mode === 'reset' ? '#ffffff' : '#fbbf24',
+                  border: 'none',
+                  borderRadius: 'var(--radius-sm)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '4px'
+                }}
+              >
+                <span>🔑</span> Esqueci a Senha
+              </button>
 
-            <div className="form-group" style={{ marginTop: '0.5rem' }}>
-              <label className="form-label" htmlFor="password">
-                {mode === 'register' && 'Criar Senha (mínimo 6 caracteres)'}
-                {mode === 'login' && 'Senha'}
-                {mode === 'reset' && 'Nova Senha (mínimo 6 caracteres)'}
-              </label>
-              <input
-                id="password"
-                type="password"
-                className="form-input"
-                placeholder="••••••••"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required
-                autoFocus={mode !== 'reset'}
-              />
+              <button
+                type="button"
+                onClick={() => { setMode('register'); setError(''); }}
+                style={{
+                  flex: 1,
+                  padding: '0.5rem 0.25rem',
+                  fontSize: '0.8125rem',
+                  fontWeight: mode === 'register' ? 700 : 500,
+                  background: mode === 'register' ? 'var(--accent-green)' : 'transparent',
+                  color: mode === 'register' ? '#ffffff' : 'var(--text-secondary)',
+                  border: 'none',
+                  borderRadius: 'var(--radius-sm)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '4px'
+                }}
+              >
+                <span>✨</span> 1º Acesso
+              </button>
             </div>
 
-            {(mode === 'register' || mode === 'reset') && (
-              <div className="form-group">
-                <label className="form-label" htmlFor="confirm-password">Confirmar Nova Senha</label>
-                <input
-                  id="confirm-password"
-                  type="password"
-                  className="form-input"
-                  placeholder="••••••••"
-                  value={confirmPassword}
-                  onChange={e => setConfirmPassword(e.target.value)}
-                  required
-                />
-              </div>
-            )}
-
-            <button
-              id="btn-login"
-              type="submit"
-              className="btn btn-primary btn-lg"
-              disabled={loading || requestingCode}
-              style={{ marginTop: '0.75rem', width: '100%', justifyContent: 'center' }}
-            >
-              {loading ? (
-                <>
-                  <div className="loading-spin" style={{ width: 16, height: 16 }} />
-                  {mode === 'register' && 'Cadastrando...'}
-                  {mode === 'login' && 'Entrando...'}
-                  {mode === 'reset' && 'Atualizando Senha...'}
-                </>
-              ) : (
-                <>
-                  {mode === 'register' && '🔐 Criar Senha'}
-                  {mode === 'login' && '🔐 Entrar'}
-                  {mode === 'reset' && '✅ Confirmar e Atualizar Senha'}
-                </>
-              )}
-            </button>
-
-            {/* Ações de alternância de fluxo */}
-            <div className="login-flow-toggle" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '1rem' }}>
-              {mode === 'login' && (
-                <>
+            {/* CONTEÚDO DA ABA: ESQUECI A SENHA (REDEFINIÇÃO) */}
+            {mode === 'reset' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+                <div style={{
+                  background: 'rgba(245, 158, 11, 0.1)',
+                  border: '1px solid rgba(245, 158, 11, 0.35)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: '0.875rem 1rem',
+                  fontSize: '0.8125rem',
+                  color: 'var(--text-primary)',
+                  lineHeight: 1.45
+                }}>
+                  <div style={{ fontWeight: 700, color: '#fbbf24', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                    <span>🛡️</span> Como Redefinir a Senha com o Líder EULLON:
+                  </div>
                   <div>
-                    Primeiro acesso de {selectedUser.name.charAt(0) + selectedUser.name.slice(1).toLowerCase()}?{' '}
-                    <button type="button" onClick={() => { setMode('register'); setError(''); }}>
-                      Criar Senha
-                    </button>
+                    1. Clique no botão amarelo abaixo para <strong>gerar e enviar o código</strong> para o painel do Líder EULLON.<br/>
+                    2. Peça os <strong>6 dígitos</strong> para o Eullon.<br/>
+                    3. Digite o código e sua nova senha para redefinir na hora!
                   </div>
-                  <div style={{ marginTop: '0.25rem' }}>
-                    <button
-                      type="button"
-                      onClick={handleStartReset}
-                      disabled={requestingCode}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        color: 'var(--accent-blue-light)',
-                        fontSize: '0.8125rem',
-                        cursor: 'pointer',
-                        textDecoration: 'underline',
-                        padding: '4px'
-                      }}
-                    >
-                      {requestingCode ? '⏳ Solicitando ao Líder...' : '🔑 Esqueceu a senha? Solicitar código ao Líder EULLON'}
-                    </button>
-                  </div>
-                </>
-              )}
-
-              {mode === 'register' && (
-                <div>
-                  Já cadastrou a sua senha?{' '}
-                  <button type="button" onClick={() => { setMode('login'); setError(''); }}>
-                    Fazer Login
-                  </button>
                 </div>
-              )}
 
-              {mode === 'reset' && (
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                  <button
-                    type="button"
-                    onClick={() => { setMode('login'); setError(''); }}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: 'var(--text-secondary)',
-                      fontSize: '0.8125rem',
-                      cursor: 'pointer',
-                      textDecoration: 'underline'
-                    }}
-                  >
-                    ← Voltar ao Login
-                  </button>
-
+                {!codeGenerated ? (
                   <button
                     type="button"
                     onClick={handleStartReset}
                     disabled={requestingCode}
+                    className="btn btn-lg"
                     style={{
-                      background: 'none',
-                      border: 'none',
-                      color: 'var(--accent-blue-light)',
-                      fontSize: '0.8125rem',
-                      cursor: 'pointer',
-                      textDecoration: 'underline'
+                      background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                      color: '#ffffff',
+                      fontWeight: 700,
+                      justifyContent: 'center',
+                      boxShadow: '0 4px 14px rgba(245, 158, 11, 0.35)',
+                      padding: '0.875rem'
                     }}
                   >
-                    🔄 Gerar Novo Código
+                    {requestingCode ? (
+                      <>
+                        <div className="loading-spin" style={{ width: 16, height: 16 }} />
+                        Enviando código ao Líder Eullon...
+                      </>
+                    ) : (
+                      <>📩 Gerar e Enviar Código ao Líder EULLON</>
+                    )}
                   </button>
+                ) : (
+                  <form onSubmit={handleSubmit} className="login-form">
+                    <div className="form-group">
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <label className="form-label" htmlFor="reset-code" style={{ color: '#fbbf24', fontWeight: 600 }}>
+                          Código de 6 Dígitos (do Líder)
+                        </label>
+                        <button
+                          type="button"
+                          onClick={handleStartReset}
+                          disabled={requestingCode}
+                          style={{ background: 'none', border: 'none', color: 'var(--accent-blue-light)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline' }}
+                        >
+                          🔄 Reenviar Código
+                        </button>
+                      </div>
+                      <input
+                        id="reset-code"
+                        type="text"
+                        maxLength={6}
+                        className="form-input"
+                        placeholder="Ex: 839201"
+                        value={resetCode}
+                        onChange={e => setResetCode(e.target.value.replace(/\D/g, ''))}
+                        style={{
+                          letterSpacing: '5px',
+                          fontSize: '1.35rem',
+                          textAlign: 'center',
+                          fontWeight: 800,
+                          color: '#fbbf24',
+                          background: 'rgba(245, 158, 11, 0.06)',
+                          borderColor: 'rgba(245, 158, 11, 0.5)'
+                        }}
+                        required
+                        autoFocus
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="new-password">Nova Senha</label>
+                      <input
+                        id="new-password"
+                        type="password"
+                        className="form-input"
+                        placeholder="Mínimo 6 caracteres"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="confirm-new-password">Confirmar Nova Senha</label>
+                      <input
+                        id="confirm-new-password"
+                        type="password"
+                        className="form-input"
+                        placeholder="Repita a nova senha"
+                        value={confirmPassword}
+                        onChange={e => setConfirmPassword(e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-lg"
+                      disabled={loading}
+                      style={{
+                        background: 'linear-gradient(135deg, #10b981, #059669)',
+                        width: '100%',
+                        justifyContent: 'center',
+                        fontWeight: 700,
+                        marginTop: '0.5rem'
+                      }}
+                    >
+                      {loading ? 'Salvando...' : '✅ Confirmar e Salvar Nova Senha'}
+                    </button>
+                  </form>
+                )}
+              </div>
+            )}
+
+            {/* CONTEÚDO DA ABA: LOGIN NORMAL */}
+            {mode === 'login' && (
+              <form className="login-form" onSubmit={handleSubmit} id="login-form">
+                <div className="form-group" style={{ marginTop: '0.25rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <label className="form-label" htmlFor="password">Senha</label>
+                    <button
+                      type="button"
+                      onClick={() => { setMode('reset'); setError(''); }}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: '#fbbf24',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        textDecoration: 'underline'
+                      }}
+                    >
+                      Esqueceu a senha?
+                    </button>
+                  </div>
+                  <input
+                    id="password"
+                    type="password"
+                    className="form-input"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    autoFocus
+                  />
                 </div>
-              )}
-            </div>
-          </form>
+
+                <button
+                  id="btn-login"
+                  type="submit"
+                  className="btn btn-primary btn-lg"
+                  disabled={loading}
+                  style={{ marginTop: '0.75rem', width: '100%', justifyContent: 'center' }}
+                >
+                  {loading ? (
+                    <>
+                      <div className="loading-spin" style={{ width: 16, height: 16 }} />
+                      Entrando...
+                    </>
+                  ) : (
+                    <>🔐 Entrar</>
+                  )}
+                </button>
+
+                {/* Botão de destaque para redefinição */}
+                <button
+                  type="button"
+                  onClick={() => { setMode('reset'); setError(''); }}
+                  className="btn btn-block"
+                  style={{
+                    marginTop: '0.75rem',
+                    background: 'rgba(245, 158, 11, 0.08)',
+                    border: '1px solid rgba(245, 158, 11, 0.35)',
+                    color: '#fbbf24',
+                    fontSize: '0.8125rem',
+                    fontWeight: 600,
+                    justifyContent: 'center'
+                  }}
+                >
+                  🔑 Esqueceu a Senha? Redefinir com o Líder
+                </button>
+              </form>
+            )}
+
+            {/* CONTEÚDO DA ABA: PRIMEIRO ACESSO / CADASTRAR */}
+            {mode === 'register' && (
+              <form className="login-form" onSubmit={handleSubmit}>
+                <div className="form-group" style={{ marginTop: '0.25rem' }}>
+                  <label className="form-label" htmlFor="register-password">
+                    Criar Senha (mínimo 6 caracteres)
+                  </label>
+                  <input
+                    id="register-password"
+                    type="password"
+                    className="form-input"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    autoFocus
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="confirm-reg-password">Confirmar Senha</label>
+                  <input
+                    id="confirm-reg-password"
+                    type="password"
+                    className="form-input"
+                    placeholder="••••••••"
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-lg"
+                  disabled={loading}
+                  style={{
+                    background: 'linear-gradient(135deg, #10b981, #059669)',
+                    marginTop: '0.75rem',
+                    width: '100%',
+                    justifyContent: 'center'
+                  }}
+                >
+                  {loading ? 'Cadastrando...' : '✨ Criar Senha e Entrar'}
+                </button>
+              </form>
+            )}
+          </div>
         )}
       </div>
     </div>
   );
 }
+
 
