@@ -384,6 +384,17 @@ p  { color: var(--text-secondary); }
   color: white;
 }
 
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+.btn-outline:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-focus);
+  color: var(--accent-blue-light);
+}
+
 .btn-lg {
   padding: 0.75rem 1.5rem;
   font-size: 0.9375rem;

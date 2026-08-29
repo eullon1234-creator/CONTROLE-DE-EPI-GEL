@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import {
+  collection, getDocs, query, orderBy, addDoc, updateDoc, doc, increment, serverTimestamp
+} from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { filterProdutos } from '../utils/search';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
@@ -15,12 +18,137 @@ function getStatusBadge(produto) {
 }
 
 export default function Estoque() {
+  const { user } = useAuth();
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState(false);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('todos');
   const navigate = useNavigate();
+
+  // Estados para Modal de Transferência para Estoque Morto / Venda
+  const [showTransferModal, setShowTransferModal] = useState(false);
+  const [transferProduct, setTransferProduct] = useState(null);
+  const [transferForm, setTransferForm] = useState({
+    quantidade: '',
+    tipoDestino: 'OBRA',
+    destinoNome: '',
+    localizacao: 'Box Almoxarifado Separado',
+    valorUnitario: '',
+    observacao: '',
+    data: format(new Date(), 'yyyy-MM-dd')
+  });
+  const [transferring, setTransferring] = useState(false);
+
+  const handleOpenTransfer = (e, produto) => {
+    e.stopPropagation();
+    if (!produto.estoqueAtual || produto.estoqueAtual <= 0) {
+      toast.error('Este produto não possui saldo em estoque para transferir.');
+      return;
+    }
+    setTransferProduct(produto);
+    setTransferForm({
+      quantidade: '1',
+      tipoDestino: 'OBRA',
+      destinoNome: '',
+      localizacao: 'Box Almoxarifado Separado',
+      valorUnitario: produto.preco || '',
+      observacao: '',
+      data: format(new Date(), 'yyyy-MM-dd')
+    });
+    setShowTransferModal(true);
+  };
+
+  const handleConfirmTransfer = async (e) => {
+    e.preventDefault();
+    if (!transferProduct) return;
+    const qty = parseInt(transferForm.quantidade);
+    if (!qty || qty <= 0) {
+      toast.error('Informe uma quantidade válida.');
+      return;
+    }
+    if (qty > transferProduct.estoqueAtual) {
+      toast.error(`Quantidade informada (${qty}) excede o saldo atual em estoque (${transferProduct.estoqueAtual}).`);
+      return;
+    }
+
+    setTransferring(true);
+    try {
+      // 1. Cria registro no estoque_morto
+      await addDoc(collection(db, 'estoque_morto'), {
+        produtoId: transferProduct.id,
+        produtoCodigo: transferProduct.codigo,
+        produtoDescricao: transferProduct.descricao,
+        unidade: transferProduct.unidade,
+        ca: transferProduct.ca || '',
+        quantidade: qty,
+        tipoDestino: transferForm.tipoDestino,
+        destinoNome: transferForm.destinoNome.trim() || (transferForm.tipoDestino === 'OBRA' ? 'Outra Obra' : 'Almoxarifado Separado'),
+        localizacao: transferForm.localizacao.trim() || 'Separado no Almoxarifado',
+        valorUnitario: parseFloat(transferForm.valorUnitario) || (parseFloat(transferProduct.preco) || 0),
+        observacao: transferForm.observacao.trim() || '',
+        data: transferForm.data,
+        status: 'SEPARADO',
+        criadoPor: user?.email || 'Sistema',
+        criadoEm: serverTimestamp()
+      });
+
+      // 2. Decrementa o estoque principal em produtos
+      await updateDoc(doc(db, 'produtos', transferProduct.id), {
+        estoqueAtual: increment(-qty)
+      });
+
+      // 3. Registra movimentação de auditoria
+      await addDoc(collection(db, 'movimentacoes'), {
+        tipo: 'TRANSFERENCIA',
+        data: transferForm.data,
+        produtoId: transferProduct.id,
+        produtoCodigo: transferProduct.codigo,
+        produtoDescricao: transferProduct.descricao,
+        unidade: transferProduct.unidade,
+        quantidade: qty,
+        observacao: `[TRANSFERÊNCIA PARA ${transferForm.tipoDestino}] ${transferForm.destinoNome}: ${transferForm.observacao}`,
+        registradoPor: user?.uid || 'Sistema',
+        registradoPorEmail: user?.email || 'Sistema',
+        criadoEm: serverTimestamp()
+      });
+
+      // 4. Atualiza estado local
+      setProdutos(prev => prev.map(p => {
+        if (p.id === transferProduct.id) {
+          return { ...p, estoqueAtual: p.estoqueAtual - qty };
+        }
+        return p;
+      }));
+
+      toast.success(
+        (t) => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <span>✅ <strong>{qty} {transferProduct.unidade}</strong> transferidos para <strong>Estoque Morto / Venda</strong>!</span>
+            <button
+              className="btn btn-sm btn-primary"
+              style={{ padding: '3px 8px', fontSize: '0.75rem', alignSelf: 'flex-start' }}
+              onClick={() => {
+                toast.dismiss(t.id);
+                navigate('/estoque-morto');
+              }}
+            >
+              Ver na aba Estoque Morto ➔
+            </button>
+          </div>
+        ),
+        { duration: 6000 }
+      );
+
+      setShowTransferModal(false);
+      setTransferProduct(null);
+    } catch (error) {
+      console.error('Erro ao transferir item:', error);
+      toast.error('Erro ao transferir item para o estoque separado.');
+    } finally {
+      setTransferring(false);
+    }
+  };
 
   useEffect(() => {
     async function load() {
@@ -1025,7 +1153,15 @@ export default function Estoque() {
           <h1 className="page-title">📦 Estoque</h1>
           <p className="page-subtitle">{produtos.length} produtos cadastrados · {filtered.length} exibidos</p>
         </div>
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <button
+            className="btn btn-outline"
+            onClick={() => navigate('/estoque-morto')}
+            style={{ borderColor: 'rgba(59, 130, 246, 0.4)', color: '#60a5fa' }}
+            id="btn-ver-estoque-morto"
+          >
+            🏷️ Estoque Morto / Venda
+          </button>
           <button
             className="btn btn-success"
             onClick={handleExportExcel}
@@ -1136,6 +1272,7 @@ export default function Estoque() {
                 <th>Est. Máx</th>
                 <th>Est. Atual</th>
                 <th>Status</th>
+                <th style={{ textAlign: 'center' }}>Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -1171,10 +1308,165 @@ export default function Estoque() {
                     {p.estoqueAtual}
                   </td>
                   <td>{getStatusBadge(p)}</td>
+                  <td onClick={(e) => e.stopPropagation()} style={{ textAlign: 'center' }}>
+                    <button
+                      className="btn btn-sm btn-outline"
+                      onClick={(e) => handleOpenTransfer(e, p)}
+                      title="Transferir para Estoque Morto / Venda / Outra Obra"
+                      style={{
+                        padding: '0.3rem 0.6rem',
+                        fontSize: '0.75rem',
+                        borderColor: 'rgba(59, 130, 246, 0.4)',
+                        color: '#60a5fa',
+                        background: 'rgba(59, 130, 246, 0.08)'
+                      }}
+                    >
+                      🔄 Transferir
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* ── MODAL: TRANSFERIR ITEM DO ESTOQUE PRINCIPAL ───────────────── */}
+      {showTransferModal && transferProduct && (
+        <div className="install-modal-overlay" onClick={() => setShowTransferModal(false)}>
+          <div className="install-modal" onClick={e => e.stopPropagation()} style={{ maxWidth: '580px' }}>
+            <div className="install-modal-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span style={{ fontSize: '1.25rem' }}>🔄</span>
+                <h3 style={{ margin: 0 }}>Transferir para Estoque Morto / Venda / Obra</h3>
+              </div>
+              <button onClick={() => setShowTransferModal(false)} className="install-modal-close">×</button>
+            </div>
+
+            <form onSubmit={handleConfirmTransfer}>
+              <div className="install-modal-body" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
+                <div style={{ padding: '0.85rem', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', marginBottom: '1.25rem' }}>
+                  <div style={{ fontWeight: 700, fontSize: '1rem', color: '#93c5fd' }}>
+                    [{transferProduct.codigo}] {transferProduct.descricao}
+                  </div>
+                  <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginTop: '4px', display: 'flex', gap: '1rem' }}>
+                    <span>Saldo Atual: <strong style={{ color: 'var(--accent-green)' }}>{transferProduct.estoqueAtual} {transferProduct.unidade}</strong></span>
+                    {transferProduct.ca && <span>CA: <strong>{transferProduct.ca}</strong></span>}
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <div className="form-group">
+                    <label className="form-label">Quantidade a Transferir *</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max={transferProduct.estoqueAtual}
+                      className="form-input"
+                      value={transferForm.quantidade}
+                      onChange={e => setTransferForm({ ...transferForm, quantidade: e.target.value })}
+                      placeholder="Ex: 5"
+                      required
+                    />
+                    <small style={{ color: 'var(--text-muted)', fontSize: '0.7rem' }}>
+                      Máx disponível: {transferProduct.estoqueAtual} {transferProduct.unidade}
+                    </small>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Tipo de Destino *</label>
+                    <select
+                      className="form-select"
+                      value={transferForm.tipoDestino}
+                      onChange={e => setTransferForm({ ...transferForm, tipoDestino: e.target.value })}
+                      required
+                    >
+                      <option value="OBRA">🏢 Transferência para Outra Obra</option>
+                      <option value="VENDA">💰 Venda / Desmobilização</option>
+                      <option value="MORTO">⚠️ Estoque Morto / Obsoleto</option>
+                      <option value="AVARIADO">🛠️ Avariado / Quarentena</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <div className="form-group">
+                    <label className="form-label">Obra de Destino / Comprador *</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      placeholder="Ex: Obra 015 - Santos / Comprador X"
+                      value={transferForm.destinoNome}
+                      onChange={e => setTransferForm({ ...transferForm, destinoNome: e.target.value })}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Valor Unit. Estimado (R$)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      className="form-input"
+                      placeholder="0.00"
+                      value={transferForm.valorUnitario}
+                      onChange={e => setTransferForm({ ...transferForm, valorUnitario: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <div className="form-group">
+                    <label className="form-label">Local no Almoxarifado (Separado)</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      placeholder="Ex: Box 3 - Palete A"
+                      value={transferForm.localizacao}
+                      onChange={e => setTransferForm({ ...transferForm, localizacao: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Data da Separação</label>
+                    <input
+                      type="date"
+                      className="form-input"
+                      value={transferForm.data}
+                      onChange={e => setTransferForm({ ...transferForm, data: e.target.value })}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group" style={{ marginBottom: '0.5rem' }}>
+                  <label className="form-label">Observação / Justificativa *</label>
+                  <textarea
+                    className="form-input"
+                    rows="3"
+                    placeholder="Informe o motivo da separação, solicitação de engenheiro, proposta de venda ou motivo do descarte..."
+                    value={transferForm.observacao}
+                    onChange={e => setTransferForm({ ...transferForm, observacao: e.target.value })}
+                    required
+                  />
+                </div>
+
+                <div style={{ padding: '0.75rem', background: 'rgba(245, 158, 11, 0.08)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '8px', fontSize: '0.8125rem', color: '#fbbf24' }}>
+                  ⚠️ Ao confirmar, <strong>{transferForm.quantidade || 0} {transferProduct.unidade}</strong> serão deduzidos do Estoque Principal e transferidos para a aba <strong>Estoque Morto / Venda</strong>.
+                </div>
+              </div>
+
+              <div className="install-modal-footer" style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+                <button type="button" onClick={() => setShowTransferModal(false)} className="btn btn-ghost">
+                  Cancelar
+                </button>
+                <button type="submit" className="btn btn-primary" disabled={transferring}>
+                  {transferring ? 'Transferindo...' : 'Confirmar Transferência'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </div>

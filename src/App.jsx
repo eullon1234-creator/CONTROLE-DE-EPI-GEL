@@ -13,6 +13,7 @@ import Produtos from './pages/Produtos';
 import Importar from './pages/Importar';
 import Imprimir from './pages/Imprimir';
 import Relatorios from './pages/Relatorios';
+import EstoqueMorto from './pages/EstoqueMorto';
 
 function AppLayout({ children }) {
   return (
@@ -99,6 +100,16 @@ function App() {
             <PrivateRoute>
               <AppLayout><Relatorios /></AppLayout>
             </PrivateRoute>
+          } />
+
+          <Route path="/estoque-morto" element={
+            <PrivateRoute>
+              <AppLayout><EstoqueMorto /></AppLayout>
+            </PrivateRoute>
+          } />
+
+          <Route path="/estoque-venda" element={
+            <Navigate to="/estoque-morto" replace />
           } />
 
           <Route path="*" element={<Navigate to="/" replace />} />

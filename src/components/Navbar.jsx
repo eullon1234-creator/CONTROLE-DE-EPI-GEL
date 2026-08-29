@@ -12,12 +12,13 @@ const navItems = [
 ];
 
 const managementItems = [
-  { to: '/estoque',   icon: '📦', label: 'Estoque' },
-  { to: '/historico', icon: '📋', label: 'Histórico' },
-  { to: '/produtos',  icon: '🗂️', label: 'Produtos' },
-  { to: '/imprimir',  icon: '🖨️', label: 'Imprimir Ficha' },
-  { to: '/importar',  icon: '⬆️', label: 'Importar Dados' },
-  { to: '/relatorios', icon: '📊', label: 'Relatórios & KPIs' },
+  { to: '/estoque',        icon: '📦', label: 'Estoque' },
+  { to: '/estoque-morto',  icon: '🏷️', label: 'Estoque Morto / Venda' },
+  { to: '/historico',      icon: '📋', label: 'Histórico' },
+  { to: '/produtos',       icon: '🗂️', label: 'Produtos' },
+  { to: '/imprimir',       icon: '🖨️', label: 'Imprimir Ficha' },
+  { to: '/importar',       icon: '⬆️', label: 'Importar Dados' },
+  { to: '/relatorios',     icon: '📊', label: 'Relatórios & KPIs' },
 ];
 
 const ALL_SYSTEM_USERS = [
@@ -346,6 +347,9 @@ export default function Navbar() {
             <div className="mobile-drawer-content">
               <div className="drawer-section">
                 <div className="nav-section-label">Gestão</div>
+                <NavLink to="/estoque-morto" onClick={() => setIsMobileMenuOpen(false)} className={({ isActive }) => `drawer-item ${isActive ? 'active' : ''}`}>
+                  <span className="drawer-icon">🏷️</span> Estoque Morto / Venda
+                </NavLink>
                 <NavLink to="/historico" onClick={() => setIsMobileMenuOpen(false)} className={({ isActive }) => `drawer-item ${isActive ? 'active' : ''}`}>
                   <span className="drawer-icon">📋</span> Histórico
                 </NavLink>
